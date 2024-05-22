@@ -39,7 +39,7 @@
                 </table>
             </div>
             <button type="button" class="btn btn-success mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/reportsPost'"><i class="fa-solid fa-file"></i>
+                onclick="location.href='http://application.gulk.co.jp/reportsPost'"><i class="fa-solid fa-file"></i>
                 週報提出</button><br>
             <button type="button" class="btn btn-success mb-2 buttonW"
                 onclick="location.href='http://localhost/klug_app/public/reportsCheck'"><i class="fa-solid fa-file"></i>
