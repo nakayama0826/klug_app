@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('style')
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endpush
 
 @section('left_tab')
@@ -19,11 +19,16 @@
 @section('second_header')
     <div class="text-center page_title h4 py-2">
         <i class="fa-solid fa-home" style="font-size: 70%;"></i>
-        top-page
+        トップページ
     </div>
 @endsection
 
 @section('contents')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="wrapper">
         <main>
             <div id="member_info" class="container text-center">
@@ -43,13 +48,11 @@
                 週報提出</button><br>
             <button type="button" class="btn btn-success mb-2 buttonW"
                 onclick="location.href='http://localhost/klug_app/public/reportsCheck'"><i class="fa-solid fa-file"></i>
-                週報確認</button> <br>
+                週報確認</button><br>
             <button type="button" class="btn btn-success mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/reportsCheckAdmin'">　　　　　　<i
-                    class="fa-solid fa-file-import"></i> 週報確認（管理者用）</button>
+                onclick="location.href='http://localhost/klug_app/public/reportsCheckAdmin'">　　　　　　<i class="fa-solid fa-file-import"></i> 週報確認（管理者用）</button>
             <button type="button" class="btn buttonW"
-                onclick="location.href='http://localhost/klug_app/public/admin'">管理者用トップページへ</button>
+                onclick="location.href='http://localhost/klug_app/public/admin'"><i class="fa-solid fa-gear"></i>管理者用トップページへ</button>
         </main>
     </div>
 @endsection
-

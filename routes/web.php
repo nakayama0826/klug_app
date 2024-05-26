@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportsCheckController;
+use App\Http\Controllers\ReportsCheckAdminController;
+use App\Http\Controllers\ReportsPostController;
 use App\Http\Controllers\HomeController;
 
 
@@ -21,29 +23,38 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class,'index']);
-    Route::get('/reportsCheck', [ReportsCheckController::class,'index']);
-    Route::get('/reportsPost', function () {
-        return view('reportsPost');
-    }); 
-    Route::get('/reportsCheckAdmin', function () {
-        return view('reportsCheckAdmin');
-    });
-    Route::get('/reportsCheckAdmin', function () {
-        return view('reportsCheckAdmin');
-    });
-    Route::get('/admin', function () {
-        return view('admin');
-    });
-    Route::get('/userAdd', function () {
-        return view('userAdd');
-    });
-    Route::get('/userEdit', function () {
-        return view('userEdit');
-    });
-    Route::get('/dataDelete', function () {
-        return view('dataDelete');
-    });
+    // トップページ用のルート
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    
+    // 週報提出用のルート
+    Route::get('/reportsPost', [ReportsPostController::class, 'index']);
+    Route::post('/reportsPost/entry', [ReportsPostController::class, 'entry'])->name('reportsPost.home');
+    Route::post('/reportsPostEdit/edit', [ReportsPostController::class, 'edit'])->name('reportsPostEdit.home');
+    
+    // 週報確認用のルート
+    Route::get('/reportsCheck', [ReportsCheckController::class, 'index']);
+    Route::post('/reportsCheck/search', [ReportsCheckController::class, 'search'])->name('search.reportsCheck');
+    Route::post('/reportsCheck/edit', [ReportsCheckController::class, 'edit'])->name('edit.reportsCheck');
+    Route::post('/comfirmPost/reportsCheck', [ReportsCheckController::class, 'comfirmPost'])->name('comfirmPost.reportsCheck');
+    
+    // 週報確認（管理者用）のルート
+    Route::get('/reportsCheckAdmin', [ReportsCheckAdminController::class, 'index']);
+    Route::post('/reportsCheckAdmin/search', [ReportsCheckAdminController::class, 'search'])->name('reportsCheckAdmin.search');
+    Route::post('/reportsCheckAdmin/edit', [ReportsCheckAdminController::class, 'edit'])->name('reportsCheckAdmin.edit');
+    Route::post('/comfirmPostAdmin', [ReportsCheckAdminController::class, 'comfirmPost'])->name('comfirmPostAdmin');
+    
+    // Route::get('/admin', function () {
+    //     return view('admin');
+    // });
+    // Route::get('/userAdd', function () {
+    //     return view('userAdd');
+    // });
+    // Route::get('/userEdit', function () {
+    //     return view('userEdit');
+    // });
+    // Route::get('/dataDelete', function () {
+    //     return view('dataDelete');
+    // });
 });
 
 Route::middleware([
