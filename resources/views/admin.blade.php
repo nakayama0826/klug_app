@@ -39,18 +39,18 @@
                 </table>
             </div>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/userAdd'"><i class="fa-solid fa-users"></i>
+                onclick="location.href='http://application.gulk.co.jp/userAdd'"><i class="fa-solid fa-users"></i>
                 ユーザー追加</button> <br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/userEdit'"><i
+                onclick="location.href='http://application.gulk.co.jp/userEdit'"><i
                     class="fa-solid fa-pen-to-square"></i>
                 ユーザー編集</button><br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/dataDelete'"><i
+                onclick="location.href='http://application.gulk.co.jp/dataDelete'"><i
                     class="fa-solid fa-delete-left"></i>
                 データ削除</button>
             <button type="button" class="btn buttonW"
-                onclick="location.href='http://localhost/klug_app/public/home'">トップページへ</button>
+                onclick="location.href='http://application.gulk.co.jp/home'">トップページへ</button>
         </main>
     </div>
 @endsection

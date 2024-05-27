@@ -47,12 +47,12 @@
                 onclick="location.href='http://application.gulk.co.jp/reportsPost'"><i class="fa-solid fa-file"></i>
                 週報提出</button><br>
             <button type="button" class="btn btn-success mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/reportsCheck'"><i class="fa-solid fa-file"></i>
+                onclick="location.href='http://application.gulk.co.jp/reportsCheck'"><i class="fa-solid fa-file"></i>
                 週報確認</button><br>
             <button type="button" class="btn btn-success mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/reportsCheckAdmin'">　　　　　　<i class="fa-solid fa-file-import"></i> 週報確認（管理者用）</button>
+                onclick="location.href='http://application.gulk.co.jp/reportsCheckAdmin'">　　　　　　<i class="fa-solid fa-file-import"></i> 週報確認（管理者用）</button>
             <button type="button" class="btn buttonW"
-                onclick="location.href='http://localhost/klug_app/public/admin'"><i class="fa-solid fa-gear"></i>管理者用トップページへ</button>
+                onclick="location.href='http://application.gulk.co.jp/admin'"><i class="fa-solid fa-gear"></i>管理者用トップページへ</button>
         </main>
     </div>
 @endsection
