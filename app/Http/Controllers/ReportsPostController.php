@@ -22,10 +22,17 @@ class ReportsPostController extends Controller
             ['key_number', '=', $this->get_key_number()]
         ])->first();
 
+        // 未提出の場合先週のレポートを表示させる
+        $lastReports = reportsPost::where([
+            ['name', '=', $user->name],
+            ['name_id', '=', $user->id],
+            ['key_number', '=', $this->get_key_number() - 1]
+        ])->first();
+
         // 今日の日付をフォーマットして値を返却する
         $today = Carbon::today()->format('Y年m月d日');
         $key_number = $this->get_key_number();
-        return view('reportsPost', compact('user', 'today', 'reportsPost', 'key_number'));
+        return view('reportsPost', compact('user', 'today', 'reportsPost', 'key_number', 'lastReports'));
     }
 
 

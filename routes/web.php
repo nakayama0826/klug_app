@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportsCheckController;
 use App\Http\Controllers\ReportsCheckAdminController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportsPostController;
 use App\Http\Controllers\HomeController;
 
@@ -43,18 +44,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reportsCheckAdmin/edit', [ReportsCheckAdminController::class, 'edit'])->name('reportsCheckAdmin.edit');
     Route::post('/comfirmPostAdmin', [ReportsCheckAdminController::class, 'comfirmPost'])->name('comfirmPostAdmin');
     
-    // Route::get('/admin', function () {
-    //     return view('admin');
-    // });
-    // Route::get('/userAdd', function () {
-    //     return view('userAdd');
-    // });
-    // Route::get('/userEdit', function () {
-    //     return view('userEdit');
-    // });
-    // Route::get('/dataDelete', function () {
-    //     return view('dataDelete');
-    // });
+    Route::get('/admin', [AdminController::class, 'index']);
+
+    Route::get('/userAdd', function () {
+        return view('userAdd');
+    });
+    Route::get('/userEdit', function () {
+        return view('userEdit');
+    });
+    Route::get('/dataDelete', function () {
+        return view('dataDelete');
+    });
 });
 
 Route::middleware([

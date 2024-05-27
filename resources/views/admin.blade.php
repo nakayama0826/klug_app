@@ -17,7 +17,7 @@
 @endsection
 
 @section('second_header')
-    <div class="text-center bg-danger text-white h4 py-2">
+    <div class="text-center bg-secondary text-white h4 py-2">
         <i class="fa-solid fa-key" style="font-size: 70%;"></i>
         Admin
     </div>
@@ -26,14 +26,26 @@
 @section('contents')
     <div class="wrapper">
         <main>
-            <button type="button" class="btn btn-danger mb-2 buttonW"
+            <div id="member_info" class="container text-center">
+                <table border="1" width="100%">
+                    <tr>
+                        <th class="bg-secondary text-white">氏名</th>
+                        <th class="bg-secondary text-white">所属部署</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->Department }}</td>
+                    </tr>
+                </table>
+            </div>
+            <button type="button" class="btn btn-secondary mb-2 buttonW"
+                onclick="location.href='http://localhost/klug_app/public/userAdd'"><i class="fa-solid fa-users"></i>
+                ユーザー追加</button> <br>
+            <button type="button" class="btn btn-secondary mb-2 buttonW"
                 onclick="location.href='http://localhost/klug_app/public/userEdit'"><i
                     class="fa-solid fa-pen-to-square"></i>
                 ユーザー編集</button><br>
-            <button type="button" class="btn btn-danger mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/userAdd'"><i class="fa-solid fa-users"></i>
-                ユーザー追加</button> <br>
-            <button type="button" class="btn btn-danger mb-2 buttonW"
+            <button type="button" class="btn btn-secondary mb-2 buttonW"
                 onclick="location.href='http://localhost/klug_app/public/dataDelete'"><i
                     class="fa-solid fa-delete-left"></i>
                 データ削除</button>

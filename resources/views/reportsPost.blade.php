@@ -5,11 +5,13 @@
 @endpush
 
 @section('left_tab')
-    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 140%; color: {{ empty($reportsPost)  ? '#198754' : '#ffc107' }}"></i>
+    <i id="back_btn" class="fa-solid fa-backward-step"
+        style="font-size: 140%; color: {{ empty($reportsPost) ? '#198754' : '#ffc107' }}"></i>
 @endsection
 
 @section('right_tab')
-    <i id="menu_tab" class="fa-solid fa-ellipsis" style="font-size: 140%; color: {{ empty($reportsPost)  ? '#198754' : '#ffc107' }}"></i>
+    <i id="menu_tab" class="fa-solid fa-ellipsis"
+        style="font-size: 140%; color: {{ empty($reportsPost) ? '#198754' : '#ffc107' }}"></i>
 @endsection
 
 @section('second_header')
@@ -46,7 +48,7 @@
                     {{-- 提出済みか否かで分岐をする --}}
                     @if (empty($reportsPost))
                         <td><input id="first_day" type="date" class="border_input" name="first_day"
-                                value="{{ old('first_day', ) }}"></td>
+                                value="{{ old('first_day') }}"></td>
                         <td>～</td>
                         <td><input id="last_day" type="date" class="border_input" name="last_day"
                                 value="{{ old('last_day') }}"></td>
@@ -65,7 +67,7 @@
                     <td colspan="3">
                         {{-- 提出済みか否かで分岐をする --}}
                         @if (empty($reportsPost))
-                            <textarea class="border_textarea_post" name="post">{{ old('post') }}</textarea>
+                            <textarea class="border_textarea_post" name="post">{{ old('post', empty($lastReports) ? '' : $lastReports->post) }}</textarea>
                         @else
                             <textarea class="border_textarea_post" name="post">{{ $reportsPost->post }}</textarea>
                         @endif
@@ -78,7 +80,7 @@
                     <td colspan="3">
                         {{-- 提出済みか否かで分岐をする --}}
                         @if (empty($reportsPost))
-                            <textarea class="border_textarea" name="concern">{{ old('concern') }}</textarea>
+                            <textarea class="border_textarea" name="concern">{{ old('concern', empty($lastReports) ? '' : $lastReports->concern) }}</textarea>
                         @else
                             <textarea class="border_textarea" name="concern">{{ $reportsPost->concern }}</textarea>
                         @endif
@@ -91,7 +93,7 @@
                     <td colspan="3">
                         {{-- 提出済みか否かで分岐をする --}}
                         @if (empty($reportsPost))
-                            <textarea class="border_textarea" name="schedule">{{ old('schedule') }}</textarea>
+                            <textarea class="border_textarea" name="schedule">{{ old('schedule', empty($lastReports) ? '' : $lastReports->schedule) }}</textarea>
                         @else
                             <textarea class="border_textarea" name="schedule">{{ $reportsPost->schedule }}</textarea>
                         @endif
@@ -107,41 +109,49 @@
                 <div class="row pb-2">
                     <div class="col-5"><input id="work_day1" type="date" name="work_day1"
                             value="{{ old('work_day1') }}"></div>
-                    <div class="col-3"><input type="time" name="start_time1" value="{{ old('start_time1', '09:00') }}">
+                    <div class="col-3"><input type="time" name="start_time1"
+                            value="{{ old('start_time1', empty($lastReports) ? '' : $lastReports->start_time1) }}">
                     </div>
-                    <div class="col-3"><input type="time" name="end_time1" value="{{ old('end_time1', '18:00') }}">
+                    <div class="col-3"><input type="time" name="end_time1"
+                            value="{{ old('end_time1', empty($lastReports) ? '' : $lastReports->end_time1) }}">
                     </div>
                 </div>
                 <div class="row pb-2">
                     <div class="col-5"><input id="work_day2" type="date" name="work_day2"
                             value="{{ old('work_day2') }}"></div>
-                    <div class="col-3"><input type="time" name="start_time2" value="{{ old('start_time2', '09:00') }}">
+                    <div class="col-3"><input type="time" name="start_time2"
+                            value="{{ old('start_time2', empty($lastReports) ? '' : $lastReports->start_time2) }}">
                     </div>
-                    <div class="col-3"><input type="time" name="end_time2" value="{{ old('end_time2', '18:00') }}">
+                    <div class="col-3"><input type="time" name="end_time2"
+                            value="{{ old('end_time2', empty($lastReports) ? '' : $lastReports->end_time2) }}">
                     </div>
                 </div>
                 <div class="row pb-2">
                     <div class="col-5"><input id="work_day3" type="date" name="work_day3"
                             value="{{ old('work_day3') }}"></div>
-                    <div class="col-3"><input type="time" name="start_time3" value="{{ old('start_time3', '09:00') }}">
+                    <div class="col-3"><input type="time" name="start_time3"
+                            value="{{ old('start_time3', empty($lastReports) ? '' : $lastReports->start_time3) }}">
                     </div>
-                    <div class="col-3"><input type="time" name="end_time3" value="{{ old('end_time3', '18:00') }}">
+                    <div class="col-3"><input type="time" name="end_time3"
+                            value="{{ old('end_time3', empty($lastReports) ? '' : $lastReports->end_time3) }}">
                     </div>
                 </div>
                 <div class="row pb-2">
                     <div class="col-5"><input id="work_day4" type="date" name="work_day4"
                             value="{{ old('work_day4') }}"></div>
                     <div class="col-3"><input type="time" name="start_time4"
-                            value="{{ old('start_time4', '09:00') }}"></div>
-                    <div class="col-3"><input type="time" name="end_time4" value="{{ old('end_time4', '18:00') }}">
+                            value="{{ old('start_time4', empty($lastReports) ? '' : $lastReports->start_time4) }}"></div>
+                    <div class="col-3"><input type="time" name="end_time4"
+                            value="{{ old('end_time4', empty($lastReports) ? '' : $lastReports->end_time4) }}">
                     </div>
                 </div>
                 <div class="row pb-2">
                     <div class="col-5"><input id="work_day5" type="date" name="work_day5"
                             value="{{ old('work_day5') }}"></div>
                     <div class="col-3"><input type="time" name="start_time5"
-                            value="{{ old('start_time5', '09:00') }}"></div>
-                    <div class="col-3"><input type="time" name="end_time5" value="{{ old('end_time5', '18:00') }}">
+                            value="{{ old('start_time5', empty($lastReports) ? '' : $lastReports->start_time5) }}"></div>
+                    <div class="col-3"><input type="time" name="end_time5"
+                            value="{{ old('end_time5', empty($lastReports) ? '' : $lastReports->end_time5) }}">
                     </div>
                 </div>
             @else
