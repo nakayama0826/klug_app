@@ -11,7 +11,6 @@
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 		crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/0bcc8bf126.js" crossorigin="anonymous"></script>
-	{{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
 	@stack('style')
 </head>
 
@@ -25,4 +24,4 @@
 	@yield('contents')
 </body>
 
-<script src="{{ asset('/js/header.js') }}"></script>
+<script src="{{ asset('/js/main.js') }}"></script>

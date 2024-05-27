@@ -53,45 +53,41 @@ header
 	/* 画像を水平中央に配置 */
 }
 
+.page_title {
+	background-color: rgb(0, 146, 44);
+	color: #ffffff;
+}
+
 /*-------------------------------------------
 main
 -------------------------------------------*/
-.form_info {
-	text-align: right;
-	font-size: 12px;
-}
-
-.post_container {
-	padding: 20px;
-	width: 100%;
-	margin: 0 auto;
-}
-
 table {
-	width: 100%;
+	width: 90%;
 	border-collapse: collapse;
+	margin-left: auto;
+        margin-right: auto;
 }
 
-.border_input {
-	border: 1px solid;
-	width: 100%;
-	box-sizing: border-box;
+td {
+	padding: 8px;
+	padding-top: 18px !important;
+	text-align: center;
 }
 
-.border_textarea {
-	border: 1px solid;
-	width: 100%;
-	height: 60px;
-	box-sizing: border-box;
+.red-line {
+	border-bottom: 2px solid;
+	height: 10px;
+	/* 行間を調整 */
 }
 
-.border_textarea_post {
-	border: 1px solid;
-	width: 100%;
-	height: 240px;
-	box-sizing: border-box;
+.header-table {
+	width: auto;
+	/* 必要に応じてテーブルの幅を調整 */
+	margin-right: auto;
+	display: flex;
 }
 
-.buttonW {
-	width: 100%;
+input[type="text"] {
+	font-size: 14px; /* フォントサイズを調整 */
+	padding: 2px; /* パディングを調整 */
 }
