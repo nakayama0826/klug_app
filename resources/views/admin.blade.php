@@ -5,7 +5,7 @@
 @endpush
 
 @section('left_tab')
-    <i id="logout_btn" class="fa-solid fa-door-open" style="font-size: 120%; color:rgb(255, 14, 14)"></i>
+    <i id="logout_btn" class="fa-solid fa-door-open" style="font-size: 120%; color:rgb(149, 149, 149)"></i>
     <form id="logout_form" method="POST" action="{{ route('logout') }}" class="inline" style="display: none;">
         @csrf
         <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"></button>
@@ -13,7 +13,7 @@
 @endsection
 
 @section('right_tab')
-    <i id="menu_tab" class="fa-solid fa-ellipsis" style="font-size: 140%; color:rgb(255, 14, 14)"></i>
+    <i id="menu_tab" class="fa-solid fa-ellipsis" style="font-size: 140%; color:rgb(149, 149, 149)"></i>
 @endsection
 
 @section('second_header')
@@ -39,8 +39,9 @@
                 </table>
             </div>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/userAdd'"><i class="fa-solid fa-users"></i>
-                ユーザー追加</button> <br>
+                onclick="location.href='http://localhost/klug_app/public/register'"><i
+                    class="fa-solid fa-pen-to-square"></i>
+                ユーザー追加</button><br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
                 onclick="location.href='http://localhost/klug_app/public/userEdit'"><i
                     class="fa-solid fa-pen-to-square"></i>
