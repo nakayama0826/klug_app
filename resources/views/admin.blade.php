@@ -39,7 +39,7 @@
                 </table>
             </div>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://application.gulk.co.jp/userAdd'"><i class="fa-solid fa-users"></i>
+                onclick="location.href='http://application.gulk.co.jp/register'"><i class="fa-solid fa-users"></i>
                 ユーザー追加</button> <br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
                 onclick="location.href='http://application.gulk.co.jp/userEdit'"><i
