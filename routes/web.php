@@ -19,10 +19,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware(['auth'])->group(function () {
     // トップページ用のルート
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -44,11 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reportsCheckAdmin/edit', [ReportsCheckAdminController::class, 'edit'])->name('reportsCheckAdmin.edit');
     Route::post('/comfirmPostAdmin', [ReportsCheckAdminController::class, 'comfirmPost'])->name('comfirmPostAdmin');
     
-    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
-    Route::get('/userAdd', function () {
-        return view('userAdd');
-    });
     Route::get('/userEdit', function () {
         return view('userEdit');
     });

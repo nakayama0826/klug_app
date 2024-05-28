@@ -17,7 +17,7 @@
 @endsection
 
 @section('second_header')
-    <div class="text-center page_title h4 py-2">
+    <div class="text-center bg-success text-white h4 py-2">
         <i class="fa-solid fa-home" style="font-size: 70%;"></i>
         トップページ
     </div>
@@ -34,8 +34,8 @@
             <div id="member_info" class="container text-center">
                 <table border="1" width="100%">
                     <tr>
-                        <th>氏名</th>
-                        <th>所属部署</th>
+                        <th class="bg-success text-white">氏名</th>
+                        <th class="bg-success text-white">所属部署</th>
                     </tr>
                     <tr>
                         <td>{{ $user->name }}</td>
