@@ -5,7 +5,7 @@
 @endpush
 
 @section('left_tab')
-    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; color:rgb(106, 184, 99)"></i>
+    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; width:21.6px; color:rgb(106, 184, 99)"></i>
 @endsection
 
 @section('right_tab')

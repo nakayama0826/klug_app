@@ -5,7 +5,7 @@
 @endpush
 
 @section('left_tab')
-    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; color:rgb(106, 184, 99)"></i>
+    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; width:21.6px; color:rgb(106, 184, 99)"></i>
 @endsection
 
 @section('right_tab')
@@ -23,7 +23,7 @@
 @section('contents')
     <div class="header-table">
         <label for="year_input" class="ml-4 pt-1">年：</label>
-        <form action="{{ route('search.reportsCheck') }}" method="POST">
+        <form action="{{ route('reportsCheck.search') }}" method="POST">
             @csrf
             <input type="text" name="year_input" value="{{ old('year_input', $year) }}" style="width: 60px"
                 maxlength="4" placeholder="YYYY" pattern="\d{4}" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
@@ -48,7 +48,7 @@
                     ※先週分の週報が未提出です
                 </td>
                 <td>
-                    <form action="{{ route('edit.reportsCheck') }}" method="POST">
+                    <form action="{{ route('reportsCheck.edit') }}" method="POST">
                         @csrf
                         <input type="hidden" name="key_number" value="">
                         <button class="btn-danger mb-1">提出</button>
@@ -75,7 +75,7 @@
                     </form>
                     {{-- 先々週分までの週報は編集できるようにする --}}
                     @if ($key_number - $report->key_number < 3)
-                        <form action="{{ route('edit.reportsCheck') }}" method="POST">
+                        <form action="{{ route('reportsCheck.edit') }}" method="POST">
                             @csrf
                             <input type="hidden" name="key_number" value="{{ $report->key_number }}">
                             <button class="btn-warning">編集</button>

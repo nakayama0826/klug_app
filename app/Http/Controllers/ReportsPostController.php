@@ -9,7 +9,7 @@ use App\Models\reportsPost;
 
 class ReportsPostController extends Controller
 {
-    //画面を開いた時に呼び出されるコントローラー
+    // 最初にページを開くときに呼び出されるメソッド
     public function index()
     {
         // ユーザー情報の取得

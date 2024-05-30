@@ -5,7 +5,7 @@
 @endpush
 
 @section('left_tab')
-    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; color:rgb(17, 132, 255)"></i>
+    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; width:21.6px; color:rgb(17, 132, 255)"></i>
 @endsection
 
 @section('right_tab')
@@ -22,7 +22,7 @@
 @section('contents')
     <div class="post_container pt-0">
         <div class="form_info">
-            <div class="h6">報告日：{{ $reportsPost->reporting_date }}</div>
+            <div class="h6">報告日：{{ \Carbon\Carbon::parse($reportsPost->reporting_date)->format('Y年m月d日') }}</div>
             <div class="h6">報告者：{{ $reportsPost->name }}</div>
         </div>
 

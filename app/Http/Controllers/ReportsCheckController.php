@@ -10,12 +10,13 @@ use App\Models\reportsPost;
 
 class ReportsCheckController extends Controller
 {
+    // 最初にページを開くときに呼び出されるメソッド
     public function index()
     {
         // ユーザー情報の取得
         $user = Auth::user();
         $datetime = Carbon::now();
-        // 今年度の値を取得する（例）2024
+        // 今年の値を取得する（例）2024
         $year = $datetime->format('Y');
         // 今月の値を取得する（例）05
         $month = $datetime->format('m');
@@ -97,7 +98,7 @@ class ReportsCheckController extends Controller
         return view('reportsPost', compact('user', 'today', 'reportsPost', 'key_number'));
     }
 
-    // 週報を確する
+    // 週報を確認する
     public function comfirmPost(Request $request)
     {
         // ユーザー情報の取得
@@ -112,7 +113,6 @@ class ReportsCheckController extends Controller
 
         return view('comfirmPost', compact('reportsPost'));
     }
-
 
     // キー番号を返す関数　YYYY＋週番号
     public function get_key_number()

@@ -19,7 +19,7 @@
 @section('second_header')
     <div class="text-center bg-secondary text-white h4 py-2">
         <i class="fa-solid fa-key" style="font-size: 70%;"></i>
-        Admin
+        管理者用トップページ
     </div>
 @endsection
 
@@ -39,19 +39,16 @@
                 </table>
             </div>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/register'"><i
-                    class="fa-solid fa-pen-to-square"></i>
+                onclick="location.href='http://localhost/klug_app/public/register'"><i class="fa-solid fa-people-robbery"></i>
                 ユーザー追加</button><br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/userEdit'"><i
-                    class="fa-solid fa-pen-to-square"></i>
+                onclick="location.href='http://localhost/klug_app/public/userEdit'"><i class="fa-solid fa-user-pen"></i>
                 ユーザー編集</button><br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://localhost/klug_app/public/dataDelete'"><i
-                    class="fa-solid fa-delete-left"></i>
+                onclick="location.href='http://localhost/klug_app/public/dataDelete'"><i class="fa-solid fa-trash"></i>
                 データ削除</button>
-            <button type="button" class="btn buttonW"
-                onclick="location.href='http://localhost/klug_app/public/home'">トップページへ</button>
+            <button type="button" class="btn buttonW" onclick="location.href='http://localhost/klug_app/public/home'">
+                <i class="fa-solid fa-home"></i>トップページへ</button>
         </main>
     </div>
 @endsection

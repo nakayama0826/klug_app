@@ -5,7 +5,7 @@
 @endpush
 
 @section('left_tab')
-    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; color:rgb(106, 184, 99)"></i>
+    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; width:21.6px; color:rgb(106, 184, 99)"></i>
 @endsection
 
 @section('right_tab')
@@ -25,7 +25,7 @@
         <form action="{{ route('reportsCheckAdmin.search') }}" method="POST">
             @csrf
             <input type="text" name="name" value="{{ old('name', $name) }}" style="width: 80px" maxlength="24"
-                placeholder="名前">
+                placeholder="NAME">
             <label for="year_input" class="pt-1"></label>
             <input type="text" name="year_input" value="{{ old('year_input', $year) }}" style="width: 60px"
                 maxlength="4" placeholder="YYYY" pattern="\d{4}" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
@@ -62,6 +62,8 @@
                 <td>
                     <form action="{{ route('comfirmPostAdmin') }}" method="POST">
                         @csrf
+                        <input type="hidden" name="name" value="{{ $report->name }}">
+                        <input type="hidden" name="id" value="{{ $report->name_id }}">
                         <input type="hidden" name="key_number" value="{{ $report->key_number }}">
                         <button class="btn-primary mb-1">確認</button>
                     </form>

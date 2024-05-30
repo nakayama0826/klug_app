@@ -15,10 +15,21 @@ const backEl = document.getElementById('back_btn');
 
 if (backEl !== null) {
     backEl.addEventListener('click', function () {
-        // window.location.href='{{ url()->previous() }}';
+        // 一つ前の画面に戻る
         history.back()
     })
 }
+
+// ヘッダーのロゴが押された時の処理
+const logoEl = document.getElementById('klug_logo');
+
+if (logoEl !== null) {
+    logoEl.addEventListener('click', function () {
+        // ホーム画面にリダイレクト
+        window.location.href = "http://localhost/klug_app/public/home";
+    })
+}
+
 
 // 作業時刻に値が設定されたら自動で設定を行う
 const firstDayInput = document.getElementById('first_day');
@@ -45,6 +56,7 @@ function updateWorkDays() {
     }
 }
 
+// 作業期間1が入力されたらイベント発火
 if (firstDayInput !== null) {
     firstDayInput.addEventListener('input', updateWorkDays);
 }
