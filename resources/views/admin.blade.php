@@ -19,7 +19,7 @@
 @section('second_header')
     <div class="text-center bg-secondary text-white h4 py-2">
         <i class="fa-solid fa-key" style="font-size: 70%;"></i>
-        管理者用トップページ
+        管理者用ページ
     </div>
 @endsection
 
@@ -48,7 +48,7 @@
                 onclick="location.href='http://application.gulk.co.jp/dataDelete'"><i class="fa-solid fa-trash"></i>
                 データ削除</button>
             <button type="button" class="btn buttonW"
-                onclick="location.href='http://application.gulk.co.jp/home'"><i class="fa-solid fa-home">トップページへ</button>
+                onclick="location.href='http://application.gulk.co.jp/home'"><i class="fa-solid fa-home"></i>トップページへ</button>
         </main>
     </div>
 @endsection
