@@ -44,7 +44,7 @@
                 </table>
             </div>
             <button type="button" class="btn btn-success mb-2 buttonW"
-                onclick="location.href='http://application.gulk.co.jp/reportsPost'"><i class="fa-solid fa-file"></i>
+                onclick="location.href='http://application.gulk.co.jp/reportsPost'"><i class="fa-solid fa-pen-to-square"></i>
                 週報提出</button><br>
             <button type="button" class="btn btn-success mb-2 buttonW"
                 onclick="location.href='http://application.gulk.co.jp/reportsCheck'"><i class="fa-solid fa-file"></i>
@@ -52,7 +52,7 @@
             <button type="button" class="btn btn-success mb-2 buttonW"
                 onclick="location.href='http://application.gulk.co.jp/reportsCheckAdmin'" {{ !$checkAuth ? 'style=display:none' : '' }} {{ !$checkAuth ? 'disabled' : '' }}>　　　　　　<i class="fa-solid fa-file-import"></i> 週報確認（管理者用）</button>
             <button type="button" class="btn buttonW"
-                onclick="location.href='http://application.gulk.co.jp/admin'" {{ !$checkAuth ? 'style=display:none' : '' }} {{ !$checkAuth ? 'disabled' : '' }}><i class="fa-solid fa-gear"></i>管理者用トップページへ</button>
+                onclick="location.href='http://application.gulk.co.jp/admin'" {{ !$checkAuth ? 'style=display:none' : '' }} {{ !$checkAuth ? 'disabled' : '' }}><i class="fa-solid fa-key"></i>管理者用トップページへ</button>
         </main>
     </div>
 @endsection

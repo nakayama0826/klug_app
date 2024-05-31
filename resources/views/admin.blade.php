@@ -39,18 +39,16 @@
                 </table>
             </div>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://application.gulk.co.jp/register'"><i class="fa-solid fa-users"></i>
+                onclick="location.href='http://application.gulk.co.jp/register'"><i class="fa-solid fa-people-robbery"></i>
                 ユーザー追加</button> <br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://application.gulk.co.jp/userEdit'"><i
-                    class="fa-solid fa-pen-to-square"></i>
+                onclick="location.href='http://application.gulk.co.jp/userEdit'"><i class="fa-solid fa-user-pen"></i>
                 ユーザー編集</button><br>
             <button type="button" class="btn btn-secondary mb-2 buttonW"
-                onclick="location.href='http://application.gulk.co.jp/dataDelete'"><i
-                    class="fa-solid fa-delete-left"></i>
+                onclick="location.href='http://application.gulk.co.jp/dataDelete'"><i class="fa-solid fa-trash"></i>
                 データ削除</button>
             <button type="button" class="btn buttonW"
-                onclick="location.href='http://application.gulk.co.jp/home'">トップページへ</button>
+                onclick="location.href='http://application.gulk.co.jp/home'"><i class="fa-solid fa-home">トップページへ</button>
         </main>
     </div>
 @endsection
