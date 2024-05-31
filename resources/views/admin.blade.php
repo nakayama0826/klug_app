@@ -17,7 +17,7 @@
 @endsection
 
 @section('second_header')
-    <div class="text-center bg-secondary text-white h4 py-2">
+    <div class="text-center bg-secondary text-white h4 py-2 mb-0">
         <i class="fa-solid fa-key" style="font-size: 70%;"></i>
         管理者用ページ
     </div>
