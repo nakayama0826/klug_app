@@ -6,7 +6,7 @@
 
 @section('left_tab')
     <i id="back_btn" class="fa-solid fa-backward-step"
-        style="font-size: 140%; color: {{ empty($reportsPost) ? '#198754' : '#ffc107' }}"></i>
+        style="font-size: 140%; width:21.6px; color: {{ empty($reportsPost) ? '#198754' : '#ffc107' }}"></i>
 @endsection
 
 @section('right_tab')
@@ -38,7 +38,7 @@
             <div class="h6">報告者：{{ $user->name }}</div>
         </div>
 
-        <form action="{{ empty($reportsPost) ? route('reportsPost.home') : route('reportsPostEdit.home') }}" method="POST">
+        <form action="{{ empty($reportsPost) ? route('reportsPost.entry') : route('reportsPost.edit') }}" method="POST">
             <table>
                 @csrf
                 <tr>

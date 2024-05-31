@@ -19,7 +19,7 @@
 @section('second_header')
     <div class="text-center bg-secondary text-white h4 py-2">
         <i class="fa-solid fa-key" style="font-size: 70%;"></i>
-        Admin
+        管理者用トップページ
     </div>
 @endsection
 

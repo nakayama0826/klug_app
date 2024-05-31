@@ -10,6 +10,7 @@ use App\Models\reportsPost;
 
 class reportsCheckAdminController extends Controller
 {
+    // 最初にページを開くときに呼び出されるメソッド
     public function index()
     {
         // ユーザー情報の取得
@@ -58,15 +59,19 @@ class reportsCheckAdminController extends Controller
 
         // フォームに入力された値で検索
         $weekly_reports = DB::table('weekly_reports')
-            ->when(!empty($year), function ($query) use ($name) {
+            // 名前が入力されていれば検索をかける
+            ->when(!empty($name), function ($query) use ($name) {
                 return $query->where('name', 'LIKE', '%' . $name . '%');
             })
+            // 年（YYYY）が入力されていれば検索をかける
             ->when(!empty($year), function ($query) use ($year) {
                 return $query->where(DB::raw('SUBSTRING(reporting_date, 1, 4)'), '=', $year);
             })
+            // 月（MM）が入力されていれば検索をかける
             ->when(!empty($month), function ($query) use ($month) {
                 return $query->where(DB::raw('SUBSTRING(reporting_date, 6, 2)'), '=', $month);
             })
+            // チェックが入れられたら先週分までの情報を取得する
             ->when($request->last_week, function ($query) {
                 return $query->where(function ($query) {
                     $query->where('key_number', '=', $this->get_key_number())
@@ -92,11 +97,12 @@ class reportsCheckAdminController extends Controller
 
         // 週報確認で選択された週報を取得する
         $reportsPost = reportsPost::where([
-            ['name', '=', $user->name],
-            ['name_id', '=', $user->id],
+            ['name', '=', $request->name],
+            ['name_id', '=', $request->id],
             ['key_number', '=', $request->key_number]
         ])->first();
 
+        // 普通のユーザーと共通のbaldeへと返す
         return view('comfirmPost', compact('reportsPost'));
     }
 
@@ -107,6 +113,7 @@ class reportsCheckAdminController extends Controller
         $datetime = Carbon::now();
         $year = $datetime->format('Y');
         $weekNumber = $datetime->format('W');
+        // 年と週番号を結合する
         return $year . $weekNumber;
     }
 

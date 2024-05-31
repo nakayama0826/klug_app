@@ -17,7 +17,7 @@
 @endsection
 
 @section('second_header')
-    <div class="text-center bg-success text-white h4 py-2">
+    <div class="text-center bg-success text-white h4 py-2 mb-0">
         <i class="fa-solid fa-home" style="font-size: 70%;"></i>
         トップページ
     </div>
@@ -25,7 +25,7 @@
 
 @section('contents')
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mb-0">
             {{ session('success') }}
         </div>
     @endif
@@ -33,11 +33,11 @@
         <main>
             <div id="member_info" class="container text-center">
                 <table border="1" width="100%">
-                    <tr>
+                    <tr class="text-center">
                         <th class="bg-success text-white">氏名</th>
                         <th class="bg-success text-white">所属部署</th>
                     </tr>
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->Department }}</td>
                     </tr>
