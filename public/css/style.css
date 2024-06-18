@@ -53,6 +53,33 @@ header
 	/* 画像を水平中央に配置 */
 }
 
+#logout_btn {
+	font-size: 120%;
+	color: rgb(106, 184, 99);
+}
+
+#back_btn {
+	font-size: 120%;
+	color: rgb(106, 184, 99);
+}
+
+#logout_admin_btn {
+	font-size: 120%;
+	color: rgb(149, 149, 149);
+}
+
+#logout_form {
+	display: none;
+}
+
+#menu_tab {
+	font-size: 140%;
+}
+
+#sub_header {
+	font-size: 70%;
+}
+
 /*-------------------------------------------
 main
 -------------------------------------------*/
@@ -66,11 +93,84 @@ main
 	width: 100%;
 }
 
+.form_info {
+	text-align: right;
+	font-size: 12px;
+}
+
+.post_container {
+	padding: 20px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.border_input {
+	border: 1px solid;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.border_textarea {
+	border: 1px solid;
+	width: 100%;
+	height: 60px;
+	box-sizing: border-box;
+}
+
+.border_textarea_post {
+	border: 1px solid;
+	width: 100%;
+	height: 240px;
+	box-sizing: border-box;
+}
+
+.buttonW {
+	width: 100%;
+}
+
+#check_table {
+	width: 90%;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.check_td {
+	padding: 8px;
+	padding-top: 18px !important;
+	text-align: center;
+}
+
+.red-line {
+	border-bottom: 2px solid;
+	height: 10px;
+	/* 行間を調整 */
+}
+
+.header-table {
+	width: auto;
+	/* 必要に応じてテーブルの幅を調整 */
+	margin-right: auto;
+	display: flex;
+}
+
+input[type="text"] {
+	font-size: 14px;
+	/* フォントサイズを調整 */
+	padding: 2px;
+	/* パディングを調整 */
+}
+
 /*-------------------------------------------
 SP
 -------------------------------------------*/
 @media screen and (max-width: 767px) {
-/*-------------------------------------------
+	/*-------------------------------------------
   header
 -------------------------------------------*/
 	/* #header .site-title {

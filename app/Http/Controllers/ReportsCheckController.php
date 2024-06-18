@@ -20,6 +20,7 @@ class ReportsCheckController extends Controller
         $year = $datetime->format('Y');
         // 今月の値を取得する（例）05
         $month = $datetime->format('m');
+
         // 初期設定の値として今年度と今月の値を取得して出力
         $weekly_reports = DB::table('weekly_reports')
             ->where('name', $user->name)
@@ -33,9 +34,17 @@ class ReportsCheckController extends Controller
         // キー番号の取得
         $key_number = $this->get_key_number();
         // データが0件だった時に表示するメッセージ
-        $msg = $weekly_reports->isEmpty() ? '・データが見つかりませんでした' : '';
+        $msg = '';
 
-        return view('reportsCheck', compact('weekly_reports', 'key_number', 'check', 'year', 'month', 'msg'));
+        return response()->json([
+            'weekly_reports' => $weekly_reports,
+            'key_number' => $key_number,
+            'check' => $check,
+            'year' => $year,
+            'month' => $month,
+            'msg' => $msg,
+        ]);
+        // return view('reportsCheck', compact('weekly_reports', 'key_number', 'check', 'year', 'month', 'msg'));
     }
 
     // ヘッダーの入力項目で検索する処理
@@ -45,9 +54,9 @@ class ReportsCheckController extends Controller
         $user = Auth::user();
         $datetime = Carbon::now();
         // 入力された値を設定する（例）2024
-        $year = $request->year_input;
+        $year = $request->input('year_input');
         // 入力された値を設定する（例）06
-        $month = $request->month_input;
+        $month = $request->input('month_input');
 
         // フォームに入力された値で検索
         $weekly_reports = DB::table('weekly_reports')
@@ -69,7 +78,16 @@ class ReportsCheckController extends Controller
         // データが0件だった時に表示するメッセージ
         $msg = $weekly_reports->isEmpty() ? '・データが見つかりませんでした' : '';
 
-        return view('reportsCheck', compact('weekly_reports', 'key_number', 'check', 'year', 'month', 'msg'));
+        return response()->json([
+            'weekly_reports' => $weekly_reports,
+            'key_number' => $key_number,
+            'check' => $check,
+            'year' => $year,
+            'month' => $month,
+            'msg' => $msg,
+        ]);
+
+        // return view('reportsCheck', compact('weekly_reports', 'key_number', 'check', 'year', 'month', 'msg'));
     }
 
     // 週報を編集する
@@ -78,24 +96,34 @@ class ReportsCheckController extends Controller
         // ユーザー情報の取得
         $user = Auth::user();
         // 週報確認画面から取得してきたキー番号
-        if (empty($request->key_number)) {
+        if (empty($request->input('key_number'))) {
             // 未提出の投稿を提出ボタンから渡ってきた場合はここを通る
             $key_number = $this->get_key_number() - 1;
+            $newPost = true;
         } else {
-            $key_number = $request->key_number;
+            $key_number = $request->input('key_number');
+            $newPost = false;
         }
 
         // 週報確認で選択された週報を取得する
         $reportsPost = reportsPost::where([
             ['name', '=', $user->name],
             ['name_id', '=', $user->id],
-            ['key_number', '=', $request->key_number]
+            ['key_number', '=', $request->input('key_number')]
         ])->first();
 
         // 今日の日付をフォーマットして値を返却する
         $today = Carbon::today()->format('Y年m月d日');
 
-        return view('reportsPost', compact('user', 'today', 'reportsPost', 'key_number'));
+        return response()->json([
+            'user' => $user,
+            'today' => $today,
+            'reportsPost' => $reportsPost,
+            'key_number' => $key_number,
+            'newPost' =>  $newPost
+        ]);
+
+        // return view('reportsPost', compact('user', 'today', 'reportsPost', 'key_number'));
     }
 
     // 週報を確認する
@@ -108,10 +136,14 @@ class ReportsCheckController extends Controller
         $reportsPost = reportsPost::where([
             ['name', '=', $user->name],
             ['name_id', '=', $user->id],
-            ['key_number', '=', $request->key_number]
+            ['key_number', '=', $request->input('key_number')]
         ])->first();
 
-        return view('comfirmPost', compact('reportsPost'));
+        // return view('comfirmPost', compact('reportsPost'));
+        return response()->json([
+            'user' => $user,
+            'reportsPost' => $reportsPost,
+        ]);
     }
 
     // キー番号を返す関数　YYYY＋週番号

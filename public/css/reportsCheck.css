@@ -61,7 +61,7 @@ header
 /*-------------------------------------------
 main
 -------------------------------------------*/
-table {
+#check_table {
 	width: 90%;
 	border-collapse: collapse;
 	margin-left: auto;
