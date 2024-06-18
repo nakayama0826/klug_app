@@ -71,22 +71,22 @@ const Home: React.FC = () => {
 
   const reportsPostPrm: HttpRequestProps = {
     requestURL:rootConst.REPORTSPOSTAPI,
-    redirectURL:'/klug_app/public/reportsPost'
+    redirectURL:'/reportsPost'
   };
 
   const reportsCheckPrm: HttpRequestProps = {
     requestURL:rootConst.REPORTSCHECKAPI,
-    redirectURL:'/klug_app/public/reportsCheck'
+    redirectURL:'/reportsCheck'
   };
 
   const reportsCheckAdminPrm: HttpRequestProps = {
     requestURL:rootConst.REPORTSCHECKADMIN,
-    redirectURL:'/klug_app/public/reportsCheckAdmin'
+    redirectURL:'/reportsCheckAdmin'
   };
 
   const adminPrm: HttpRequestProps = {
     requestURL:rootConst.ADMIN,
-    redirectURL:'/klug_app/public/admin'
+    redirectURL:'/admin'
   };
 
   return (

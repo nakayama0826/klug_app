@@ -67,12 +67,12 @@ const Admin: React.FC= () => {
 
   const userEditPrm: HttpRequestProps = {
     requestURL:rootConst.USEREDITAPI,
-    redirectURL:'/klug_app/public/userEdit'
+    redirectURL:'/userEdit'
   };
   
   const dataDeletePrm: HttpRequestProps = {
     requestURL:rootConst.DATADELETE,
-    redirectURL:'/klug_app/public/dataDelete'
+    redirectURL:'/dataDelete'
   };
 
   return (

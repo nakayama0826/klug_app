@@ -14,15 +14,15 @@ const Main: React.FC = () => {
 		<>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/klug_app/public/" element={<Home />} />
-					<Route path="/klug_app/public/dashboard" element={<Home />} />
-					<Route path="/klug_app/public/reportsPost" element={<ReportsPost />} />
-					<Route path="/klug_app/public/reportsComfirm" element={<ReportsComfirm />} />
-					<Route path="/klug_app/public/reportsCheck" element={<ReportsCheck />} />
-					<Route path="/klug_app/public/reportsCheckAdmin" element={<ReportsCheckAdmin />} />
-					<Route path="/klug_app/public/admin" element={<Admin />} />
-					<Route path="/klug_app/public/userEdit" element={<UserEdit />} />
-					<Route path="/klug_app/public/dataDelete" element={<DataDelete />} />
+					<Route path="/" element={<Home />} />
+					<Route path="/dashboard" element={<Home />} />
+					<Route path="/reportsPost" element={<ReportsPost />} />
+					<Route path="/reportsComfirm" element={<ReportsComfirm />} />
+					<Route path="/reportsCheck" element={<ReportsCheck />} />
+					<Route path="/reportsCheckAdmin" element={<ReportsCheckAdmin />} />
+					<Route path="/admin" element={<Admin />} />
+					<Route path="/userEdit" element={<UserEdit />} />
+					<Route path="/dataDelete" element={<DataDelete />} />
 				</Routes>
 			</BrowserRouter>
 		</>

@@ -86,7 +86,7 @@ const userEdit = () => {
 			<Header label='ユーザー編集' leftBtn='back_btn' subHeaderProp='text-center bg-secondary text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper px-0 mx-0 ">
 			{formData.msg && <p className='text-danger pt-1'>{formData.msg}</p>}
-				<form className='mt-2 ml-4' onSubmit={(e) => handleSubmit(e, rootConst.USEREDITSEARCHAPI, '/klug_app/public/userEdit', false)}>
+				<form className='mt-2 ml-4' onSubmit={(e) => handleSubmit(e, rootConst.USEREDITSEARCHAPI, '/userEdit', false)}>
 					<input type="text" name="sName" onChange={(e) => handleChange(e)} style={{ width: '80px' }} maxLength={24}
 						placeholder="NAME" />
 					<button type="submit" className="btn-secondary ml-2">検索</button>
@@ -111,12 +111,12 @@ const userEdit = () => {
 										<input type="checkbox" name="checkAuth" checked={user.checkAuth} onChange={(e) => change(e, user.id)} />
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITEDITAPI, '/klug_app/public/userEdit', [user.adminAuth , user.checkAuth, user.name, user.id])}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITEDITAPI, '/userEdit', [user.adminAuth , user.checkAuth, user.name, user.id])}>
 											<button className="btn-secondary mb-1" type="submit">変更</button>
 										</form>
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITDELETEAPI, '/klug_app/public/userEdit', [user.adminAuth , user.checkAuth, user.name, user.id])}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITDELETEAPI, '/userEdit', [user.adminAuth , user.checkAuth, user.name, user.id])}>
 											<button className="btn-danger mb-1" type="submit">削除</button>
 										</form>
 									</td>

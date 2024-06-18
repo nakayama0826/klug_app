@@ -79,7 +79,7 @@ const ReportsPost = () => {
 			// レスポンスによって処理の流れを制御する
 			if (response.status === 200) {
 				// 成功した場合、適切なページにリダイレクト
-				navigate('/klug_app/public/');
+				navigate('/');
 			} else {
 				console.error('Error Happen');
 			}

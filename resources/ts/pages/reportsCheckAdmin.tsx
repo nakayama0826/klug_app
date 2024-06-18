@@ -89,7 +89,7 @@ const ReportsCheckAdmin = () => {
 		<>
 			<Header label='週報確認（管理者用）' leftBtn='back_btn' subHeaderProp='text-center bg-success text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper pt-2 pl-2">
-				<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKADMINSEARCHAPI, '/klug_app/public/reportsCheckAdmin', [formData.last_week], true)}>
+				<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKADMINSEARCHAPI, '/reportsCheckAdmin', [formData.last_week], true)}>
 					<input type="text" name="name" value={formData.name} className="mr-1" onChange={(e) => handleChange(e)} style={{ width: '80px' }} maxLength={24}
 						placeholder="NAME" />
 
@@ -114,7 +114,7 @@ const ReportsCheckAdmin = () => {
 										<div>{new Date(report.last_day).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}</div>
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKADMINSCOMFIRMAPI, '/klug_app/public/reportsComfirm', [report.name, report.name_id, report.key_number], false)}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKADMINSCOMFIRMAPI, '/reportsComfirm', [report.name, report.name_id, report.key_number], false)}>
 											<button className="btn-primary mb-1" type="submit">確認</button>
 										</form>
 									</td>

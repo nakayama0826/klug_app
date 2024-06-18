@@ -70,7 +70,7 @@ const ReportsPost = () => {
 		<>
 			<Header label='週報確認' leftBtn='back_btn' subHeaderProp='text-center bg-success text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper pt-2">
-				<form className='pl-4' onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKSEARCHAPI, '/klug_app/public/reportsCheck', "")}>
+				<form className='pl-4' onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKSEARCHAPI, '/reportsCheck', "")}>
 					<input type="text" id="year_input" name="year_input" className='mr-1' value={formData.year_input} onChange={(e) => handleChange(e)} style={{ width: '60px' }} maxLength={4} placeholder="YYYY" pattern="\d{4}" />
 					<input type="text" id="month_input" name="month_input" value={formData.month_input} onChange={(e) => handleChange(e)} style={{ width: '40px' }} maxLength={2} placeholder="MM" pattern="\d{2}" />
 					<button type="submit" className="btn-success ml-2">検索</button>
@@ -87,7 +87,7 @@ const ReportsPost = () => {
 										※先週分の週報が未提出です
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKEDITAPI, '/klug_app/public/reportsPost', '')}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKEDITAPI, '/reportsPost', '')}>
 											<input type="hidden" name="key_number" value='' />
 											<button type="submit" className="btn-danger mb-1">
 												提出
@@ -108,11 +108,11 @@ const ReportsPost = () => {
 										<div>{new Date(report.last_day).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}</div>
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKCOMFIRMAPI, '/klug_app/public/reportsComfirm', report.key_number)}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKCOMFIRMAPI, '/reportsComfirm', report.key_number)}>
 											<button className="btn-primary mb-1" type="submit">確認</button>
 										</form>
 										{formData.key_number - Number(report.key_number) < 3 && (
-											<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKEDITAPI, '/klug_app/public/reportsPost', report.key_number)}>
+											<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKEDITAPI, '/reportsPost', report.key_number)}>
 												<button className="btn-warning" type="submit">編集</button>
 											</form>
 										)}

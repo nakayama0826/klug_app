@@ -10,7 +10,7 @@ const handleLogoutClick = async () => {
 	if (userConfirmed) {
 		const logoutForm = document.getElementById('logout_form') as HTMLFormElement;
 		if (logoutForm) {
-			await axios.post('/klug_app/public/logout', {}, {
+			await axios.post('/logout', {}, {
 				headers: {
 					'X-CSRF-TOKEN': csrfToken
 				},

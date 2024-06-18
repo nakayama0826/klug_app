@@ -76,7 +76,7 @@ const dataDelete = () => {
 			<Header label='データ削除' leftBtn='back_btn' subHeaderProp='text-center bg-secondary text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper pl-2 pt-2">
 				{formData.msg && <p className='text-danger pt-1'>{formData.msg}</p>}
-				<form onSubmit={(e) => handleSubmit(e, rootConst.DATADELETEDLETEAPI, "/klug_app/public/dataDelete")}>
+				<form onSubmit={(e) => handleSubmit(e, rootConst.DATADELETEDLETEAPI, "/dataDelete")}>
 					<input type="text" id="sYear" name="sYear" value={formData.sYear} onChange={(e) => handleChange(e)} style={{ width: '60px' }} maxLength={4} placeholder="YYYY" pattern="\d{4}" />
 					<input type="text" id="sMonth" name="sMonth" value={formData.sMonth} onChange={(e) => handleChange(e)} style={{ width: '40px' }} maxLength={2} placeholder="MM" pattern="\d{2}" />
 					~
