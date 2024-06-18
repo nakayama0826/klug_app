@@ -6853,28 +6853,28 @@ Object.defineProperty(exports, "__esModule", ({
 exports.rootConst = void 0;
 var rootConst;
 (function (rootConst) {
-  rootConst.REPORTSPOST = 'http://localhost/klug_app/public/reportsPost';
-  rootConst.REPORTSPOSTAPI = 'http://localhost/klug_app/public/api/reportsPost';
-  rootConst.REPORTSPOSTEDITAPI = 'http://localhost/klug_app/public/api/reportsPost/edit';
-  rootConst.REPORTSPOSTENTRYAPI = 'http://localhost/klug_app/public/api/reportsPost/entry';
-  rootConst.REPORTSCHECK = 'http://localhost/klug_app/public/reportsCheck';
-  rootConst.REPORTSCHECKAPI = 'http://localhost/klug_app/public/api/reportsCheck/';
-  rootConst.REPORTSCHECKSEARCHAPI = 'http://localhost/klug_app/public/api/reportsCheck/search';
-  rootConst.REPORTSCHECKEDITAPI = 'http://localhost/klug_app/public/api/reportsCheck/edit';
-  rootConst.REPORTSCHECKCOMFIRMAPI = 'http://localhost/klug_app/public/api/reportsCheck/comfirm';
-  rootConst.REPORTSCHECKADMIN = 'http://localhost/klug_app/public/api/reportsCheckAdmin';
-  rootConst.REPORTSCHECKADMINSEARCHAPI = 'http://localhost/klug_app/public/api/reportsCheckAdmin/search';
-  rootConst.REPORTSCHECKADMINSCOMFIRMAPI = 'http://localhost/klug_app/public/api/reportsCheckAdmin/comfirmPost';
-  rootConst.GETUSERAPI = 'http://localhost/klug_app/public/getUser';
-  rootConst.ADMIN = 'http://localhost/klug_app/public/getUser';
-  rootConst.REGISTER = 'http://localhost/klug_app/public/register';
-  rootConst.USEREDITAPI = 'http://localhost/klug_app/public/api/userEdit';
-  rootConst.USEREDITSEARCHAPI = 'http://localhost/klug_app/public/api/userEdit/search';
-  rootConst.USEREDITEDITAPI = 'http://localhost/klug_app/public/api/userEdit/edit';
-  rootConst.USEREDITDELETEAPI = 'http://localhost/klug_app/public/api/userEdit/delete';
-  rootConst.DATADELETE = 'http://localhost/klug_app/public/api/dataDelete';
-  rootConst.DATADELETEDLETEAPI = 'http://localhost/klug_app/public/api/dataDelete/delete';
-  rootConst.HOME = 'http://localhost/klug_app/public';
+  rootConst.REPORTSPOST = 'http://application.gulk.co.jp/reportsPost';
+  rootConst.REPORTSPOSTAPI = 'http://application.gulk.co.jp/api/reportsPost';
+  rootConst.REPORTSPOSTEDITAPI = 'http://application.gulk.co.jp/api/reportsPost/edit';
+  rootConst.REPORTSPOSTENTRYAPI = 'http://application.gulk.co.jp/api/reportsPost/entry';
+  rootConst.REPORTSCHECK = 'http://application.gulk.co.jp/reportsCheck';
+  rootConst.REPORTSCHECKAPI = 'http://application.gulk.co.jp/api/reportsCheck/';
+  rootConst.REPORTSCHECKSEARCHAPI = 'http://application.gulk.co.jp/api/reportsCheck/search';
+  rootConst.REPORTSCHECKEDITAPI = 'http://application.gulk.co.jp/api/reportsCheck/edit';
+  rootConst.REPORTSCHECKCOMFIRMAPI = 'http://application.gulk.co.jp/api/reportsCheck/comfirm';
+  rootConst.REPORTSCHECKADMIN = 'http://application.gulk.co.jp/api/reportsCheckAdmin';
+  rootConst.REPORTSCHECKADMINSEARCHAPI = 'http://application.gulk.co.jp/api/reportsCheckAdmin/search';
+  rootConst.REPORTSCHECKADMINSCOMFIRMAPI = 'http://application.gulk.co.jp/api/reportsCheckAdmin/comfirmPost';
+  rootConst.GETUSERAPI = 'http://application.gulk.co.jp/getUser';
+  rootConst.ADMIN = 'http://application.gulk.co.jp/getUser';
+  rootConst.REGISTER = 'http://application.gulk.co.jp/register';
+  rootConst.USEREDITAPI = 'http://application.gulk.co.jp/api/userEdit';
+  rootConst.USEREDITSEARCHAPI = 'http://application.gulk.co.jp/api/userEdit/search';
+  rootConst.USEREDITEDITAPI = 'http://application.gulk.co.jp/api/userEdit/edit';
+  rootConst.USEREDITDELETEAPI = 'http://application.gulk.co.jp/api/userEdit/delete';
+  rootConst.DATADELETE = 'http://application.gulk.co.jp/api/dataDelete';
+  rootConst.DATADELETEDLETEAPI = 'http://application.gulk.co.jp/api/dataDelete/delete';
+  rootConst.HOME = 'http://application.gulk.co.jp';
 })(rootConst || (exports.rootConst = rootConst = {}));
 
 /***/ }),
@@ -7008,7 +7008,7 @@ var handleLogoClick = function handleLogoClick() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          window.location.href = "http://localhost/klug_app/public";
+          window.location.href = "http://application.gulk.co.jp";
         case 1:
         case "end":
           return _context.stop();
@@ -7303,7 +7303,7 @@ var Admin = function Admin() {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios_1["default"].get('http://localhost/klug_app/public/getUser');
+              return axios_1["default"].get('http://application.gulk.co.jp/getUser');
             case 3:
               response = _context.sent;
               data = response.data; // 必要なデータを整形
@@ -7331,10 +7331,10 @@ var Admin = function Admin() {
     fetchUser();
   }, []);
   var onClickRegister = function onClickRegister() {
-    window.location.href = 'http://localhost/klug_app/public/register';
+    window.location.href = 'http://application.gulk.co.jp/register';
   };
   var onClickHome = function onClickHome() {
-    window.location.href = 'http://localhost/klug_app/public';
+    window.location.href = 'http://application.gulk.co.jp';
   };
   // ボタンコンポーネントに渡す用のプロパティを設定する
   var userEditBtn = {

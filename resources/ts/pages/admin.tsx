@@ -13,7 +13,7 @@ const Admin: React.FC= () => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const response = await axios.get('http://localhost/klug_app/public/getUser');
+				const response = await axios.get('http://application.gulk.co.jp/getUser');
 				const data = response.data;
 				// 必要なデータを整形
 				const user = {
@@ -33,11 +33,11 @@ const Admin: React.FC= () => {
 	}, []);
 
   const onClickRegister = () => {
-    window.location.href = 'http://localhost/klug_app/public/register';
+    window.location.href = 'http://application.gulk.co.jp/register';
   }
 
   const onClickHome = () => {
-    window.location.href = 'http://localhost/klug_app/public';
+    window.location.href = 'http://application.gulk.co.jp';
   }
 
   // ボタンコンポーネントに渡す用のプロパティを設定する
