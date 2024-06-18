@@ -39,7 +39,17 @@ class reportsCheckAdminController extends Controller
         // データが0件だった時に表示するメッセージ
         $msg = $weekly_reports->isEmpty() ? '・データが見つかりませんでした' : '';
 
-        return view('reportsCheckAdmin', compact('weekly_reports', 'key_number', 'check', 'name', 'year', 'month', 'msg', 'inputCheck'));
+        // return view('reportsCheckAdmin', compact('weekly_reports', 'key_number', 'check', 'name', 'year', 'month', 'msg', 'inputCheck'));
+        return response()->json([
+            'weekly_reports' => $weekly_reports,
+            'key_number' => $key_number,
+            'check' => $check,
+            'name' => $name,
+            'year' => $year,
+            'month' => $month,
+            'msg' => $msg,
+            'inputCheck' => $inputCheck,
+        ]);
     }
 
     // ヘッダーの入力項目で検索する処理
@@ -49,13 +59,13 @@ class reportsCheckAdminController extends Controller
         $user = Auth::user();
         $datetime = Carbon::now();
         // 入力された名前で検索
-        $name = $request->name;
+        $name = $request->input('name');
         // 入力された値を設定する（例）2024
-        $year = $request->year_input;
+        $year = $request->input('year_input');
         // 入力された値を設定する（例）06
-        $month = $request->month_input;
+        $month = $request->input('month_input');
         // inputのチェック状態
-        $inputCheck = $request->last_week;
+        $inputCheck = $request->input('last_week');
 
         // フォームに入力された値で検索
         $weekly_reports = DB::table('weekly_reports')
@@ -72,7 +82,7 @@ class reportsCheckAdminController extends Controller
                 return $query->where(DB::raw('SUBSTRING(reporting_date, 6, 2)'), '=', $month);
             })
             // チェックが入れられたら先週分までの情報を取得する
-            ->when($request->last_week, function ($query) {
+            ->when($request->input('last_week'), function ($query) {
                 return $query->where(function ($query) {
                     $query->where('key_number', '=', $this->get_key_number())
                         ->orWhere('key_number', '=', $this->get_key_number() - 1);
@@ -86,7 +96,16 @@ class reportsCheckAdminController extends Controller
         // データが0件だった時に表示するメッセージ
         $msg = $weekly_reports->isEmpty() ? '・データが見つかりませんでした' : '';
 
-        return view('reportsCheckAdmin', compact('weekly_reports', 'key_number', 'name', 'year', 'month', 'msg', 'inputCheck'));
+        // return view('reportsCheckAdmin', compact('weekly_reports', 'key_number', 'name', 'year', 'month', 'msg', 'inputCheck'));
+        return response()->json([
+            'weekly_reports' => $weekly_reports,
+            'key_number' => $key_number,
+            'name' => $name,
+            'year' => $year,
+            'month' => $month,
+            'msg' => $msg,
+            'inputCheck' => $inputCheck,
+        ]);
     }
 
     // 週報を確認する
@@ -97,13 +116,16 @@ class reportsCheckAdminController extends Controller
 
         // 週報確認で選択された週報を取得する
         $reportsPost = reportsPost::where([
-            ['name', '=', $request->name],
-            ['name_id', '=', $request->id],
-            ['key_number', '=', $request->key_number]
+            ['name', '=', $request->input('name')],
+            ['name_id', '=', $request->input('id')],
+            ['key_number', '=', $request->input('key_number')]
         ])->first();
 
         // 普通のユーザーと共通のbaldeへと返す
-        return view('comfirmPost', compact('reportsPost'));
+        // return view('comfirmPost', compact('reportsPost'));
+        return response()->json([
+            'reportsPost' => $reportsPost,
+        ]);
     }
 
 
