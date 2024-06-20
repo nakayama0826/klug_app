@@ -1,9 +1,10 @@
 
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Header from '../components/header';
 import { rootConst } from '../const/rootConst';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getCsrfToken } from '../function/getCsrfToken';
 
 const ReportsCheckAdmin = () => {
 	const location = useLocation();
@@ -68,6 +69,9 @@ const ReportsCheckAdmin = () => {
 		}
 
 		try {
+			// csfrトークンを取得してヘッダーに追加する
+			const csrfToken = getCsrfToken();
+			axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 			// APIエンドポイントにPOSTリクエストを送信
 			const response = await axios.post(url, formData);
 			const fetchedData = response.data;

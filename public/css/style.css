@@ -142,7 +142,7 @@ table {
 
 .check_td {
 	padding: 8px;
-	padding-top: 18px !important;
+	padding-top: 16px !important;
 	text-align: center;
 }
 
@@ -164,6 +164,10 @@ input[type="text"] {
 	/* フォントサイズを調整 */
 	padding: 2px;
 	/* パディングを調整 */
+}
+
+.display-hidden {
+	display: none;
 }
 
 /*-------------------------------------------

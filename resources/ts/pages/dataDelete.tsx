@@ -1,22 +1,24 @@
 
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Header from '../components/header';
 import { rootConst } from '../const/rootConst';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';      
+import { getCsrfToken } from '../function/getCsrfToken';
 
+// データ削除用コンポーネント
 const dataDelete = () => {
+	// 画面遷移してきた時の値を設定する
 	const location = useLocation();
-
 	const { data } = location.state as { data: any };
 
 	// useStateフックでフォームの初期値を設定
 	const [formData, setFormData] = useState({
-		sYear: data?.sYear || '', 
-		sMonth: data?.sMonth || '', 
-		eYear: data?.eYear || '', 
-		eMonth: data?.eMonth || '', 
-		msg: data?.msg || '', 
+		sYear: data?.sYear || '',  //開始年
+		sMonth: data?.sMonth || '', //開始月
+		eYear: data?.eYear || '',  //終了年
+		eMonth: data?.eMonth || '',  // 終了月
+		msg: data?.msg || '',  //メッセージ
 	});
 
 	// useEffectを使ってフォームデータを初期化
@@ -41,7 +43,8 @@ const dataDelete = () => {
 	};
 	
 	const navigate = useNavigate();
-	
+
+	// フォームの送信ハンドラ
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, url: string, redirectURL: string) => {
 		e.preventDefault(); // デフォルトのフォーム送信を防止
 		
@@ -55,6 +58,9 @@ const dataDelete = () => {
 		}
 
 		try {
+			// csfrトークンを取得してヘッダーに追加する
+			const csrfToken = getCsrfToken();
+			axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 			// APIエンドポイントにPOSTリクエストを送信
 			const response = await axios.post(url, formData);
 			const fetchedData = response.data;

@@ -44,7 +44,6 @@ class ReportsCheckController extends Controller
             'month' => $month,
             'msg' => $msg,
         ]);
-        // return view('reportsCheck', compact('weekly_reports', 'key_number', 'check', 'year', 'month', 'msg'));
     }
 
     // ヘッダーの入力項目で検索する処理

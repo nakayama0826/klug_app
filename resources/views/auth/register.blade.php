@@ -5,32 +5,25 @@
 @endpush
 
 @section('left_tab')
-    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; width:21.6px; color:rgb(106, 184, 99)"></i>
+    <i id="back_btn" class="fa-solid fa-backward-step" style="font-size: 120%; width:21.6px; color:rgb(121, 121, 121)"></i>
 @endsection
 
 @section('right_tab')
-    <i id="menu_tab" class="fa-solid fa-ellipsis" style="font-size: 140%; color:rgb(106, 184, 99)"></i>
+    <i id="menu_tab" class="fa-solid fa-ellipsis" style="font-size: 140%; color:rgb(121, 121, 121)"></i>
 @endsection
 
 @section('second_header')
-    <div class="text-center bg-success text-white h4 py-2">
+    <div class="text-center bg-secondary text-white h4 py-2 mb-0">
         <i class="fa-solid fa-home" style="font-size: 70%;"></i>
         ユーザー登録
     </div>
 @endsection
 
 @section('contents')
-    <style>
-        div {
-            margin-top: 0px !important;
-            padding-top: 0px !important;
-        }
-    </style>
-
     <x-guest-layout>
         <x-jet-authentication-card>
 
-            <x-jet-validation-errors class="mb-4" />
+            <x-jet-validation-errors class="mb-4 display-hidden" />
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf

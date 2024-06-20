@@ -1,12 +1,13 @@
 
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import Header from '../components/header';
 import { rootConst } from '../const/rootConst';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getCsrfToken } from '../function/getCsrfToken';
 
+// 週報提出用のコンポーネント
 const ReportsPost = () => {
-	
 	// 画面遷移された際の初期値を設定する
 	const location = useLocation();
 	const { data } = location.state as { data: any };
@@ -74,6 +75,9 @@ const ReportsPost = () => {
 		}
 
 		try {
+			// csfrトークンを取得してヘッダーに追加する
+			const csrfToken = getCsrfToken();
+			axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 			// APIエンドポイントにPOSTリクエストを送信
 			const response = await axios.post(formData.newPost ? rootConst.REPORTSPOSTENTRYAPI :rootConst.REPORTSPOSTEDITAPI , formData);
 			// レスポンスによって処理の流れを制御する
@@ -108,8 +112,8 @@ const ReportsPost = () => {
 		<>
 			<Header label={!formData.newPost ? '週報提出(更新)' : '週報提出'} leftBtn='back_btn' subHeaderProp={`text-center ${!formData.newPost ? 'bg-warning' : 'bg-success'} text-white h4 py-2 mb-0`} leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper">
-				<div className="post_container pt-0">
-					{error && <p className='text-danger pt-1'>{error}</p>}
+				<div className="post_container pt-1 px-0">
+					{error && <p className='text-danger'>{error}</p>}
 					<div className="form_info">
 						<div className="h6">報告日：{formData.today}</div>
 						<div className="h6">報告者：{formData.name}</div>

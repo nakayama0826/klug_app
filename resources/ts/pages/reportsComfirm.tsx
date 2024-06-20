@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
 import Header from '../components/header';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import handleBackClick from '../function/handleBackClick';
 
+// 週報確認用コンポーネント
 const ReportsComfirm = () => {
+	// 画面遷移してきた時の値を設定する
 	const location = useLocation();
-
-	// 型アサーションを使って state の型を指定
 	const { data } = location.state as { data: any };
 
 	// useStateフックでフォームの初期値を設定:
@@ -26,22 +26,12 @@ const ReportsComfirm = () => {
 		work_day5: data?.reportsPost?.work_day5 || '', start_time5: data?.reportsPost?.start_time5 || '', end_time5: data?.reportsPost?.end_time5 || '',
 	});
 
-	// 戻るボタンが押された時の処理
-	const handleClick = async () => {
-		try {
-			handleBackClick();
-		} catch (error) {
-			console.error('ユーザー情報の取得に失敗しました:', error);
-		}
-	};
-
 	return (
 		<>
 			<Header label='週報確認' leftBtn='back_btn' subHeaderProp='text-center btn-primary text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper">
-				{/* <main> */}
-				<div className="post_container pt-0">
-					<div className="form_info pt-1">
+				<div className="post_container pt-1 px-0">
+					<div className="form_info">
 						<div className="h6">報告日：{formData.today}</div>
 						<div className="h6">報告者：{formData.name}</div>
 					</div>
@@ -144,7 +134,7 @@ const ReportsComfirm = () => {
 						</div>
 
 						<div>
-							<button className={`btn mt-2 buttonW btn-primary`} onClick={handleClick}>
+							<button className={`btn mt-2 buttonW btn-primary`} onClick={handleBackClick}>
 								戻る
 							</button>
 						</div>
