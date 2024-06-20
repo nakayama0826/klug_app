@@ -21,7 +21,7 @@ class AdminAuthMiddleware
         $user = Auth::user();
         // 管理権限ユーザーでなければリダイレクト
         if (!($user && $user->adminAuth == 1)) {
-            return redirect()->route('home');
+            return redirect()->route('/');
         }
 
         return $next($request);

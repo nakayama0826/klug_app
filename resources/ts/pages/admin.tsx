@@ -6,9 +6,13 @@ import { rootConst } from "../const/rootConst";
 import { ButtonProps, HttpRequestProps, UserProps } from '../types/interfaces';
 import axios from "axios";
 import { Outlet } from "react-router-dom";
+import Home from "../pages/home";
+import handleBackClick from "../function/handleBackClick";
+import { getCsrfToken } from "../function/getCsrfToken";
 
-const Admin: React.FC= () => {
+const Admin: React.FC = () => {
   const [user, setUser] = useState<UserProps | null>(null);
+  const [error, setError] = useState('');
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -29,8 +33,8 @@ const Admin: React.FC= () => {
 			}
 		};
 
-		fetchUser();
-	}, []);
+    fetchUser();
+  }, []);
 
   const onClickRegister = () => {
     window.location.href = 'http://application.gulk.co.jp/register';
@@ -57,14 +61,6 @@ const Admin: React.FC= () => {
     fontAwesome: 'fa-solid fa-trash',
   };
 
-  const homeBtn: ButtonProps = {
-    label: 'トップページへ',
-    checkAuth: true,
-    adminAuth: true,
-    classPro: 'btn mb-2 buttonW',
-    fontAwesome: 'fa-solid fa-home',
-  };
-
   const userEditPrm: HttpRequestProps = {
     requestURL:rootConst.USEREDITAPI,
     redirectURL:'/userEdit'
@@ -75,29 +71,37 @@ const Admin: React.FC= () => {
     redirectURL:'/dataDelete'
   };
 
+  if (error) {
+    handleBackClick();
+  }
+
+  if (!user) {
+    return <Home />;
+  }
+
   return (
     <>
-      <Header label='管理者用ページ' leftBtn='logout_admin_btn' subHeaderProp='text-center bg-secondary text-white h4 py-2 mb-0' leftBtnProp='fa-solid fa-door-open'/>
+      <Header label='管理者用ページ' leftBtn='logout_admin_btn' subHeaderProp='text-center bg-secondary text-white h4 py-2 mb-0' leftBtnProp='fa-solid fa-door-open' />
       <div className="wrapper">
         <main>
           <UserInfo user={user?.name ?? ""} Department={user?.Department ?? ""} classPro="bg-secondary text-white" />
           <button type="submit" className='btn mt-2 buttonW btn-secondary' onClick={onClickRegister}><i className="fa-solid fa-people-robbery"></i>
-						ユーザー追加
-					</button>
+            ユーザー追加
+          </button>
           <br />
           <Button
-          ButtonProps={userEditBtn}
-          HttpRequestProps={userEditPrm}
+            ButtonProps={userEditBtn}
+            HttpRequestProps={userEditPrm}
           />
           <br />
           <Button
-          ButtonProps={dataDeleteBtn}
-          HttpRequestProps={dataDeletePrm}
+            ButtonProps={dataDeleteBtn}
+            HttpRequestProps={dataDeletePrm}
           />
           <br />
           <button type="submit" className='btn buttonW' onClick={onClickHome}><i className="fa-solid fa-home"></i>
-						トップページへ
-					</button>
+            トップページへ
+          </button>
           <Outlet />
         </main>
       </div>

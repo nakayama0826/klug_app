@@ -1,9 +1,10 @@
 
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Header from '../components/header';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { rootConst } from '../const/rootConst';
+import { getCsrfToken } from '../function/getCsrfToken';
 
 const userEdit = () => {
 	const location = useLocation();
@@ -11,13 +12,13 @@ const userEdit = () => {
 
 	// useStateフックでフォームの初期値を設定
 	const [formData, setFormData] = useState({
-		users: data?.users || [], 
-		msg: data?.msg || '',         // 空文字で初期化
-		sName: data?.sName || '',         // 空文字で初期化
-		AdminAuth: '',         // 空文字で初期化
-		CheckAuth: '',         // 空文字で初期化
-		eName: '',         // 空文字で初期化
-		eId: '',         // 空文字で初期化
+		users: data?.users || [], // 取得したユーザー情報
+		msg: data?.msg || '',    // 処理が行われた後のメッセージ
+		sName: data?.sName || '', // 検索用のユーザー名
+		AdminAuth: '',  // 管理者権限
+		CheckAuth: '', // 確認権限
+		eName: '',   // 編集するユーザー名
+		eId: '',     // 編集するユーザーID
 	});
 
 	// useEffectを使ってフォームデータを初期化
@@ -26,15 +27,16 @@ const userEdit = () => {
 			setFormData({
 				users: data?.users || [],
 				msg: data?.msg || '',
-				sName: data?.sName || '',         // 空文字で初期化
-				AdminAuth: '',         // 空文字で初期化
-				CheckAuth: '',         // 空文字で初期化
-				eName: '',         // 空文字で初期化
-				eId: '',         // 空文字で初期化
+				sName: data?.sName || '',         
+				AdminAuth: '',         
+				CheckAuth: '',         
+				eName: '',         
+				eId: '',         
 			});
 		}
 	}, [data]);
 
+	// チェックボックスが変更された際の処理
 	const change = (e: ChangeEvent<HTMLInputElement>, id: number) => {
 		const { name, checked } = e.target;
 		setFormData(prevData => ({
@@ -45,6 +47,7 @@ const userEdit = () => {
 		}));
 	};
 
+	// 入力が変更された際に発火する
 	const handleChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData(prevData => ({
@@ -55,6 +58,7 @@ const userEdit = () => {
 
 	const navigate = useNavigate();
 
+	// フォームの送信ハンドラ
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, url: string, redirectURL: string, arr:any) => {
 		e.preventDefault();
 
@@ -65,6 +69,9 @@ const userEdit = () => {
 			formData.eId = arr[3];
 		}
 		try {
+			// csfrトークンを取得してヘッダーに追加する
+			const csrfToken = getCsrfToken();
+			axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 			// APIエンドポイントにPOSTリクエストを送信
 			const response = await axios.post(url, formData);
 			const fetchedData = response.data;

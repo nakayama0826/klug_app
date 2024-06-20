@@ -6,6 +6,7 @@ import { rootConst } from '../const/rootConst';
 import Header from '../components/header';
 import { UserProps, ButtonProps, HttpRequestProps } from '../types/interfaces';
 import axios from 'axios';
+import { getCsrfToken } from '../function/getCsrfToken';
 
 const Home: React.FC = () => {
 
@@ -16,6 +17,9 @@ const Home: React.FC = () => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
+        // csfrトークンを取得してヘッダーに追加する
+        const csrfToken = getCsrfToken();
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
         // エンドポイントからAPI呼び出し格納する
 				const response = await axios.get(rootConst.GETUSERAPI);
 				const data = response.data;

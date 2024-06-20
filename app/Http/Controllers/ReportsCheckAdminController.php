@@ -15,7 +15,6 @@ class reportsCheckAdminController extends Controller
     {
         // ユーザー情報の取得
         $user = Auth::user();
-        $datetime = Carbon::now();
         // name
         $name = "";
         // year
@@ -39,7 +38,6 @@ class reportsCheckAdminController extends Controller
         // データが0件だった時に表示するメッセージ
         $msg = $weekly_reports->isEmpty() ? '・データが見つかりませんでした' : '';
 
-        // return view('reportsCheckAdmin', compact('weekly_reports', 'key_number', 'check', 'name', 'year', 'month', 'msg', 'inputCheck'));
         return response()->json([
             'weekly_reports' => $weekly_reports,
             'key_number' => $key_number,
@@ -57,7 +55,6 @@ class reportsCheckAdminController extends Controller
     {
         // ユーザー情報の取得
         $user = Auth::user();
-        $datetime = Carbon::now();
         // 入力された名前で検索
         $name = $request->input('name');
         // 入力された値を設定する（例）2024

@@ -62,7 +62,7 @@ class UserEditController extends Controller
             })->get();
 
         // msg
-        $msg = 'ユーザー名：' . $request->input('eName') . 'を削除しました';
+        $msg = '・ユーザー名：' . $request->input('eName') . 'を削除しました';
 
         // return view('userEdit', compact('users', 'msg'));
         return response()->json([

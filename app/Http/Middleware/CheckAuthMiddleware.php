@@ -21,7 +21,7 @@ class CheckAuthMiddleware
         $user = Auth::user();
         // 確認権限ユーザーでなければリダイレクト
         if (!($user && $user->checkAuth == 1)) {
-            return redirect()->route('home');
+            return redirect()->route('/');
         }
 
         return $next($request);

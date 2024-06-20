@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ButtonProps, HttpRequestProps } from '../types/interfaces';
 import axios from 'axios';
-import { rootConst } from '../const/rootConst';
+import handleBackClick from '../function/handleBackClick';
+import { getCsrfToken } from '../function/getCsrfToken';
 
 interface props {
   // ボタンに表示するための文字列
@@ -14,20 +15,21 @@ interface props {
 const Button: React.FC<props> = ({ ButtonProps, HttpRequestProps }) => {
   const navigate = useNavigate();
 
-  const [data, setData] = useState<any>();
-
   const handleClick = async () => {
     try {
+      // csfrトークンを取得してヘッダーに追加する
+      const csrfToken = getCsrfToken();
+      axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
       // APIエンドポイントにGETリクエストを送信
       const response = await axios.get(HttpRequestProps.requestURL);
       // 変数にデータを格納してnavigateに渡す
       const fetchedData = response.data;
-      setData(fetchedData);
       // データをnavigateに渡す
       navigate(HttpRequestProps.redirectURL, { state: { data: fetchedData } });
 
     } catch (err) {
       console.error('Fetch error:', err);
+      handleBackClick();
     }
   };
 
