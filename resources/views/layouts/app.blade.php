@@ -18,14 +18,14 @@
 
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
-	    axios.get('/klug_app/public/getUser') // ユーザー情報を取得するエンドポイント
+	    axios.get('/getUser') // ユーザー情報を取得するエンドポイント
 		.then(function (response) {
 		    const data = response.data;
 		    
 		    // 条件をチェック
 		    if (data.adminAuth !== 1) {
 			console.error('アクセスが許可されていません。');
-			window.location.href = "http://localhost/klug_app/public/";
+			window.location.href = "http://application.gulk.co.jp";
 		    } else {
 			document.getElementById('hiddenContents').classList.remove('display-hidden');
 		    }
