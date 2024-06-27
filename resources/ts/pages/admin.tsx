@@ -17,7 +17,7 @@ const Admin: React.FC = () => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const response = await axios.get('http://application.gulk.co.jp/getUser');
+				const response = await axios.get('http://klgsmhsnitool.gulk.co.jp/getUser');
 				const data = response.data;
 				// 必要なデータを整形
 				const user = {
@@ -37,11 +37,11 @@ const Admin: React.FC = () => {
   }, []);
 
   const onClickRegister = () => {
-    window.location.href = 'http://application.gulk.co.jp/register';
+    window.location.href = 'http://klgsmhsnitool.gulk.co.jp/register';
   }
 
   const onClickHome = () => {
-    window.location.href = 'http://application.gulk.co.jp';
+    window.location.href = 'http://klgsmhsnitool.gulk.co.jp';
   }
 
   // ボタンコンポーネントに渡す用のプロパティを設定する
