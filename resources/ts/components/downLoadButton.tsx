@@ -43,7 +43,7 @@ const DownLoadButton: React.FC<props> = ({ DownLoadButtonProps }) => {
 				<div>・{DownLoadButtonProps.fileName}をダウンロードしますか？</div>
 				<img src={`./images/${DownLoadButtonProps.fileName}.jpg`} alt="" />
 				<div className="mr-auto d-flex justify-content-end">
-					<button type="button" className='btn btn-primary' onClick={() => handleClickOk(`http://localhost/klug_app/public/dlc/${DownLoadButtonProps.fileName}.${DownLoadButtonProps.fileNameType}`, `${DownLoadButtonProps.fileName}.${DownLoadButtonProps.fileNameType}`)}>Ok</button>
+					<button type="button" className='btn btn-primary' onClick={() => handleClickOk(`http://klgsmhsnitool/dlc/${DownLoadButtonProps.fileName}.${DownLoadButtonProps.fileNameType}`, `${DownLoadButtonProps.fileName}.${DownLoadButtonProps.fileNameType}`)}>Ok</button>
 					<button id={DownLoadButtonProps.closeButton} className='btn ml-1' type="button">Cancel</button>
 				</div>
 			</dialog>
