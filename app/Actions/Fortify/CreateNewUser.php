@@ -27,23 +27,13 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-            'Department' => ['required', 'string', 'max:255'],
-            'AdminAuth' => ['string', 'max:255'],
-            'checkAuth' => ['string', 'max:255'],
         ])->validate();
-
-        // チェックボックスの値が入っていなければ0を追加する
-        $input['AdminAuth'] = array_key_exists('AdminAuth', $input) ? 1 : 0;
-        $input['checkAuth'] = array_key_exists('checkAuth', $input) ? 1 : 0;
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
-                'Department' => $input['Department'],
-                'AdminAuth' => $input['AdminAuth'],
-                'checkAuth' => $input['checkAuth'],
             ]), function (User $user) {
                 $this->createTeam($user);
             });
@@ -60,7 +50,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         $user->ownedTeams()->save(Team::forceCreate([
             'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+            'name' => explode(' ', $user->name, 2)[0]."'s Team",
             'personal_team' => true,
         ]));
     }

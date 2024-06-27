@@ -43,6 +43,12 @@ const ReportsPost = () => {
 		work_day5: data?.reportsPost?.work_day5 || data?.lastReports?.work_day5 || '',
 		start_time5: data?.reportsPost?.start_time5 || data?.lastReports?.start_time5 || '', 
 		end_time5: data?.reportsPost?.end_time5 || data?.lastReports?.end_time5 || '',
+		work_day6: data?.reportsPost?.work_day6 || data?.lastReports?.work_day6 || '',
+		start_time6: data?.reportsPost?.start_time6 || data?.lastReports?.start_time6 || '', 
+		end_time6: data?.reportsPost?.end_time6 || data?.lastReports?.end_time6 || '',
+		work_day7: data?.reportsPost?.work_day7 || data?.lastReports?.work_day7 || '',
+		start_time7: data?.reportsPost?.start_time7 || data?.lastReports?.start_time7 || '', 
+		end_time7: data?.reportsPost?.end_time7 || data?.lastReports?.end_time7 || '',
 	});
 
 	// フォームが変更された際にステートの値を更新する
@@ -74,6 +80,7 @@ const ReportsPost = () => {
 			return
 		}
 
+		//
 		try {
 			// csfrトークンを取得してヘッダーに追加する
 			const csrfToken = getCsrfToken();
@@ -211,6 +218,28 @@ const ReportsPost = () => {
 							</div>
 							<div className="col-3">
 								<input id="end_time5" type="time" name="end_time5" value={formData.end_time5} onChange={(e) => handleChange(e)} />
+							</div>
+						</div>
+						<div className="row pb-2">
+							<div className="col-5">
+								<input id="work_day6" type="date" name="work_day6" value={formData.work_day6} onChange={(e) => handleChange(e)} />
+							</div>
+							<div className="col-3">
+								<input id="start_time6" type="time" name="start_time6" value={formData.start_time6} onChange={(e) => handleChange(e)} />
+							</div>
+							<div className="col-3">
+								<input id="end_time6" type="time" name="end_time6" value={formData.end_time6} onChange={(e) => handleChange(e)} />
+							</div>
+						</div>
+						<div className="row pb-2">
+							<div className="col-5">
+								<input id="work_day7" type="date" name="work_day7" value={formData.work_day7} onChange={(e) => handleChange(e)} />
+							</div>
+							<div className="col-3">
+								<input id="start_time7" type="time" name="start_time7" value={formData.start_time7} onChange={(e) => handleChange(e)} />
+							</div>
+							<div className="col-3">
+								<input id="end_time7" type="time" name="end_time7" value={formData.end_time7} onChange={(e) => handleChange(e)} />
 							</div>
 						</div>
 						<div>

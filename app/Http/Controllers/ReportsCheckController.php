@@ -85,8 +85,6 @@ class ReportsCheckController extends Controller
             'month' => $month,
             'msg' => $msg,
         ]);
-
-        // return view('reportsCheck', compact('weekly_reports', 'key_number', 'check', 'year', 'month', 'msg'));
     }
 
     // 週報を編集する
@@ -121,8 +119,6 @@ class ReportsCheckController extends Controller
             'key_number' => $key_number,
             'newPost' =>  $newPost
         ]);
-
-        // return view('reportsPost', compact('user', 'today', 'reportsPost', 'key_number'));
     }
 
     // 週報を確認する

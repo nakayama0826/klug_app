@@ -22,7 +22,7 @@ Route::middleware('admin')->get('/getUserAdmin', function () {
     return response()->json(Auth::user());
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'restrictByCountry'])->group(function () {
     Route::get('{all}', function () {
         return view('index');
     })->where(['all' => '.*']);
