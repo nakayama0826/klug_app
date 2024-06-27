@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use PragmaRX\Google2FA\Google2FA;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserEditController extends Controller
 {
@@ -16,6 +20,31 @@ class UserEditController extends Controller
 
         // msg
         $msg = $users->isEmpty() ? '・データが見つかりませんでした' : '';
+
+        // 2段階認証登録
+        // // Google2FA インスタンスの作成
+        // $google2fa = new Google2FA();
+
+        // // シークレットキーの生成
+        // $secretKey = $google2fa->generateSecretKey();
+
+        // // リカバリーコードの生成
+        // $recoveryCodes = collect(range(1, 8))->map(function () {
+        //     return Str::random(10) . '-' . Str::random(10);
+        // })->toArray();
+
+        // // JSONエンコードされたリカバリーコード
+        // $recoveryCodesJson = json_encode($recoveryCodes);
+
+        // // ユーザーIDが1のユーザーを取得（適宜変更）
+        // $user = User::find(8);
+
+        // // シークレットキーとリカバリーコードを保存
+        // $user->update([
+        //     'two_factor_secret' => encrypt($secretKey), // シークレットキーを暗号化して保存
+        //     'two_factor_recovery_codes' => encrypt($recoveryCodesJson), // リカバリーコードを暗号化して保存
+        // ]);
+        // 2段階認証終了
 
         // return view('userEdit', compact('users', 'msg'));
         return response()->json([
@@ -64,7 +93,6 @@ class UserEditController extends Controller
         // msg
         $msg = '・ユーザー名：' . $request->input('eName') . 'を削除しました';
 
-        // return view('userEdit', compact('users', 'msg'));
         return response()->json([
             'users' => $users,
             'msg' => $msg,

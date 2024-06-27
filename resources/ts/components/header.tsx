@@ -11,13 +11,15 @@ interface HeaderProps {
 	leftBtnProp: string;
 }
 
+// ヘッダーのクリックされたアイコンの種類に応じて処理を変える
 const funcInterface = (leftBtnProp:string) => {
 	if(leftBtnProp === 'fa-solid fa-door-open') {
+		// ログアウトボタン
 		handleLogoutClick();
 	} else {
+		// それ以外であれば戻る
 		handleBackClick();
 	}
-
 }
 
 const header: React.FC<HeaderProps> = ({label, leftBtn, subHeaderProp, leftBtnProp}) => {

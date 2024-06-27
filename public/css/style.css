@@ -170,6 +170,16 @@ input[type="text"] {
 	display: none;
 }
 
+.btn-success-sub {
+	background-color: #3fc620;
+	color: #ffffff;
+}
+
+.btn-info-sub {
+	background-color: #13b8ad;
+	color: #ffffff;
+}
+
 /*-------------------------------------------
 SP
 -------------------------------------------*/

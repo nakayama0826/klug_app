@@ -7,8 +7,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reportsPost;
 
-use function PHPUnit\Framework\isEmpty;
-
 class ReportsPostController extends Controller
 {
     // 最初にページを開くときに呼び出されるメソッド
@@ -74,6 +72,12 @@ class ReportsPostController extends Controller
         $reports_post_data->work_day5 = $request->input('work_day5'); // 出勤日5
         $reports_post_data->start_time5 = $request->input('start_time5'); // 出社時刻5
         $reports_post_data->end_time5 = $request->input('end_time5'); // 退社時刻5
+        $reports_post_data->work_day6 = $request->input('work_day6'); // 出勤日6
+        $reports_post_data->start_time6 = $request->input('start_time6'); // 出社時刻6
+        $reports_post_data->end_time6 = $request->input('end_time6'); // 退社時刻6
+        $reports_post_data->work_day7 = $request->input('work_day7'); // 出勤日7
+        $reports_post_data->start_time7 = $request->input('start_time7'); // 出社時刻7
+        $reports_post_data->end_time7 = $request->input('end_time7'); // 退社時刻7
         $reports_post_data->first_day = $request->input('first_day'); // 作業期間1
         $reports_post_data->last_day = $request->input('last_day'); // 作業期間2
 
@@ -108,11 +112,16 @@ class ReportsPostController extends Controller
                 'work_day5' => $request->input('work_day5'), // 出勤日5
                 'start_time5' => $request->input('start_time5'), // 出社時刻5
                 'end_time5' => $request->input('end_time5'), // 退社時刻5
+                'work_day6' => $request->input('work_day6'), // 出勤日6
+                'start_time6' => $request->input('start_time6'), // 出社時刻6
+                'end_time6' => $request->input('end_time6'), // 退社時刻6
+                'work_day7' => $request->input('work_day7'), // 出勤日7
+                'start_time7' => $request->input('start_time7'), // 出社時刻7
+                'end_time7' => $request->input('end_time7'), // 退社時刻7
                 'first_day' => $request->input('first_day'), // 作業期間1
                 'last_day' => $request->input('last_day'), // 作業期間2
             ]);
 
-        // return redirect()->route('home')->with('success', '・週報を更新しました');
         return response()->json(['message' => 'Data processed successfully'], 200);
     }
 

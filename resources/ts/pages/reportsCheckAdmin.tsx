@@ -109,7 +109,7 @@ const ReportsCheckAdmin = () => {
 						<tr className="red-line"></tr>
 
 						{formData.weekly_reports.map((report: any) => (
-							<React.Fragment key={report.key_number}>
+							<React.Fragment key={`${report.key_number}_${report.name_id}`}>
 								<tr>
 									<td className='check_td'>週報:{report.name}</td>
 									<td className='check_td'>

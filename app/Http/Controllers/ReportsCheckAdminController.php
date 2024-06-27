@@ -119,7 +119,6 @@ class reportsCheckAdminController extends Controller
         ])->first();
 
         // 普通のユーザーと共通のbaldeへと返す
-        // return view('comfirmPost', compact('reportsPost'));
         return response()->json([
             'reportsPost' => $reportsPost,
         ]);

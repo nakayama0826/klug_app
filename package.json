@@ -14,6 +14,7 @@
         "@tailwindcss/typography": "^0.5.0",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
+        "@types/react-modal": "^3.16.3",
         "@types/react-router-dom": "^5.3.3",
         "alpinejs": "^3.0.6",
         "autoprefixer": "^10.4.7",
@@ -30,5 +31,9 @@
         "tailwindcss": "^3.1.0",
         "ts-loader": "^9.5.1",
         "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "js-file-download": "^0.4.12",
+        "react-modal": "^3.16.1"
     }
 }

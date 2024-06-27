@@ -48,13 +48,10 @@ const ReportsPost = () => {
 	// 画面遷移するための変数を設定
 	const navigate = useNavigate();
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, url: string, redirectURL: string, num: string) => {
-		e.preventDefault();
 
-		// キー情報を設定する
-		setFormData((prevData) => ({
-			...prevData,  // 既存のデータをスプレッド構文で展開
-			key_number: num  // 更新したいプロパティを上書き
-		}));
+		e.preventDefault();
+		// 取得したデータをキー番号に設定する
+		formData.key_number = num;
 
 		try {
 			// csfrトークンを取得してヘッダーに追加する
@@ -109,7 +106,7 @@ const ReportsPost = () => {
 							</>
 						)}
 						{formData.weekly_reports.map((report: any) => (
-							<React.Fragment key={report.key_number}>
+							<React.Fragment key={`${report.key_number}_${report.name_id}`}>
 								<tr>
 									<td className='check_td'>週報</td>
 									<td className='check_td'>

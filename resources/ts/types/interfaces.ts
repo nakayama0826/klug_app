@@ -19,8 +19,18 @@ export interface HttpRequestProps {
 	redirectURL: string;
 }
 
+
 export interface Props {
 	Button: ButtonProps;
 	httpRequest: HttpRequestProps;
 }
 
+export interface DownLoadButtonProps {
+	showButton: string;
+	closeButton: string;
+	dialog: string;
+	fileName: string;
+	fileNameType: string;
+	classPro?: string;
+	fontAwesome?: string;
+}
