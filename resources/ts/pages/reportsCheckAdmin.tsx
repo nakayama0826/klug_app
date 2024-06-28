@@ -15,12 +15,12 @@ const ReportsCheckAdmin = () => {
 		weekly_reports: data?.weekly_reports || [], 
 		key_number: data?.key_number || '',         // 空文字で初期化
 		check: data?.check || false,               // falseで初期化
-		name: data?.name || '',               // falseで初期化
-		id: '',               	// falseで初期化
+		name: data?.name || '',               // 空文字で初期化
+		id: '',               	// 空文字で初期化
 		year_input: data?.year || '', 	// デフォルトで現在の年
 		month_input: data?.month || '', // デフォルトで現在の月（0から始まるため+1）
-		msg: data?.msg || '',                      // 空文字で初期化
-		last_week: data?.inputCheck || true,                      // 空文字で初期化
+		msg: data?.msg || '',    // 空文字で初期化
+		last_week: data?.inputCheck || false,   // falseで初期化
 	});
 
 	// useEffectを使ってフォームデータを初期化
@@ -35,7 +35,7 @@ const ReportsCheckAdmin = () => {
 				year_input: data?.year || '',
 				month_input: data?.month || '',
 				msg: data?.msg || '',
-				last_week: data?.inputCheck || true,
+				last_week: data?.inputCheck || false,
 			});
 		}
 	}, [data]);
@@ -62,7 +62,6 @@ const ReportsCheckAdmin = () => {
 		e.preventDefault();
 
 		if(!check) {
-			// TODO
 			formData.name = arr[0];
 			formData.id = arr[1];
 			formData.key_number = arr[2];
