@@ -33,7 +33,7 @@
     @endif
 
     <div class="header-table">
-        <form action="{{ route('dataDelete.delete') }}" method="POST">
+        <form action="{{ secure_route('dataDelete.delete') }}" method="POST">
             @csrf
             <div class="container mt-2">
                 <input type="text" name="year_input_from" value="{{ old('year_input') }}" style="width: 60px"

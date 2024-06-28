@@ -15,7 +15,7 @@
         @endif
 
         <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
+            <form method="POST" action="{{ secure_route('verification.send') }}">
                 @csrf
 
                 <div>
@@ -27,12 +27,12 @@
 
             <div>
                 <a
-                    href="{{ route('profile.show') }}"
+                    href="{{ secure_route('profile.show') }}"
                     class="underline text-sm text-gray-600 hover:text-gray-900"
                 >
                     {{ __('Edit Profile') }}</a>
 
-                <form method="POST" action="{{ route('logout') }}" class="inline">
+                <form method="POST" action="{{ secure_route('logout') }}" class="inline">
                     @csrf
 
                     <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">

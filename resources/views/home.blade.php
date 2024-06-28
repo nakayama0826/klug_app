@@ -6,7 +6,7 @@
 
 @section('left_tab')
     <i id="logout_btn" class="fa-solid fa-door-open" style="font-size: 120%; color:rgb(106, 184, 99)"></i>
-    <form id="logout_form" method="POST" action="{{ route('logout') }}" class="inline" style="display: none;">
+    <form id="logout_form" method="POST" action="{{ secure_route('logout') }}" class="inline" style="display: none;">
         @csrf
         <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"></button>
     </form>

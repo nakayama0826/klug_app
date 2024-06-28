@@ -22,7 +22,7 @@
 
 @section('contents')
     <div class="header-table ml-3">
-        <form action="{{ route('reportsCheckAdmin.search') }}" method="POST">
+        <form action="{{ secure_route('reportsCheckAdmin.search') }}" method="POST">
             @csrf
             <input type="text" name="name" value="{{ old('name', $name) }}" style="width: 80px" maxlength="24"
                 placeholder="NAME">
@@ -60,7 +60,7 @@
                 </td>
 
                 <td>
-                    <form action="{{ route('comfirmPostAdmin') }}" method="POST">
+                    <form action="{{ secure_route('comfirmPostAdmin') }}" method="POST">
                         @csrf
                         <input type="hidden" name="name" value="{{ $report->name }}">
                         <input type="hidden" name="id" value="{{ $report->name_id }}">
