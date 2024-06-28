@@ -22,7 +22,7 @@
 
 @section('contents')
     <div class="header-table ml-3">
-        <form action="{{ secure_route('userEdit.search') }}" method="POST">
+        <form action="{{ route('userEdit.search') }}" method="POST">
             @csrf
             <input type="text" name="name" value="{{ old('name') }}" style="width: 80px" maxlength="24"
                 placeholder="名前">
@@ -52,7 +52,7 @@
                 <td class="pl-0 pr-0">
                     <div>{{ $user->name }}</div>
                 </td>
-                <form action="{{ secure_route('userEdit.edit') }}" method="POST">
+                <form action="{{ route('userEdit.edit') }}" method="POST">
                     @csrf
                     <td>
                         <input type="checkbox" name="AdminAuth" {{ $user->adminAuth == 1 ? 'checked' : '' }}>
@@ -65,7 +65,7 @@
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <button type="submit" class="btn-secondary mb-1 w-100">権限変更</button>
                 </form>
-                <form action="{{ secure_route('userEdit.delete') }}" method="POST">
+                <form action="{{ route('userEdit.delete') }}" method="POST">
                     @csrf
                     <input type="hidden" name="name" value="{{ $user->name }}">
                     <input type="hidden" name="id" value="{{ $user->id }}">

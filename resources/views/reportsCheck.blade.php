@@ -23,7 +23,7 @@
 @section('contents')
     <div class="header-table">
         <label for="year_input" class="ml-4 pt-1">年：</label>
-        <form action="{{ secure_route('reportsCheck.search') }}" method="POST">
+        <form action="{{ route('reportsCheck.search') }}" method="POST">
             @csrf
             <input type="text" name="year_input" value="{{ old('year_input', $year) }}" style="width: 60px"
                 maxlength="4" placeholder="YYYY" pattern="\d{4}" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
@@ -48,7 +48,7 @@
                     ※先週分の週報が未提出です
                 </td>
                 <td>
-                    <form action="{{ secure_route('reportsCheck.edit') }}" method="POST">
+                    <form action="{{ route('reportsCheck.edit') }}" method="POST">
                         @csrf
                         <input type="hidden" name="key_number" value="">
                         <button class="btn-danger mb-1">提出</button>
@@ -68,14 +68,14 @@
                     <div>{{ date('Y/m/d', strtotime($report->last_day)) }}</div>
                 </td>
                 <td>
-                    <form action="{{ secure_route('comfirmPost.reportsCheck') }}" method="POST">
+                    <form action="{{ route('comfirmPost.reportsCheck') }}" method="POST">
                         @csrf
                         <input type="hidden" name="key_number" value="{{ $report->key_number }}">
                         <button class="btn-primary mb-1">確認</button>
                     </form>
                     {{-- 先々週分までの週報は編集できるようにする --}}
                     @if ($key_number - $report->key_number < 3)
-                        <form action="{{ secure_route('reportsCheck.edit') }}" method="POST">
+                        <form action="{{ route('reportsCheck.edit') }}" method="POST">
                             @csrf
                             <input type="hidden" name="key_number" value="{{ $report->key_number }}">
                             <button class="btn-warning">編集</button>

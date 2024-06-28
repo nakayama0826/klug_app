@@ -16,7 +16,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ secure_route('password.email') }}">
+        <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <div class="block">
