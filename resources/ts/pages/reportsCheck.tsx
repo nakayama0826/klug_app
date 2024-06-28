@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Header from '../components/header';
 import { rootConst } from '../const/rootConst';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -75,7 +75,7 @@ const ReportsPost = () => {
 	// 型アサーションを使って state の型を指定
 	return (
 		<>
-			<Header label='週報確認' leftBtn='back_btn' subHeaderProp='text-center bg-success text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
+			<Header label='週報確認' leftBtn='back_btn' subHeaderProp='text-center bg-success text-white h5 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper pt-2">
 				<form className='pl-4' onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKSEARCHAPI, '/klug_app/public/reportsCheck', "")}>
 					<input type="text" id="year_input" name="year_input" className='mr-1' value={formData.year_input} onChange={(e) => handleChange(e)} style={{ width: '60px' }} maxLength={4} placeholder="YYYY" pattern="\d{4}" />

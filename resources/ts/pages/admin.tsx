@@ -85,7 +85,7 @@ const Admin: React.FC = () => {
 
   return (
     <>
-      <Header label='管理者用ページ' leftBtn='logout_admin_btn' subHeaderProp='text-center bg-secondary text-white h4 py-2 mb-0' leftBtnProp='fa-solid fa-door-open' />
+      <Header label='管理者用ページ' leftBtn='logout_admin_btn' subHeaderProp='text-center bg-secondary text-white h5 py-2 mb-0' leftBtnProp='fa-solid fa-door-open' />
       <div className="wrapper">
         <main>
           <UserInfo user={user?.name ?? ""} Department={user?.Department ?? ""} classPro="bg-secondary text-white" />

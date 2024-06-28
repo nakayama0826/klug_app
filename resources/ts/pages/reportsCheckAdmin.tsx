@@ -90,7 +90,7 @@ const ReportsCheckAdmin = () => {
 
 	return (
 		<>
-			<Header label='週報確認（管理者用）' leftBtn='back_btn' subHeaderProp='text-center bg-success text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
+			<Header label='週報確認（管理者用）' leftBtn='back_btn' subHeaderProp='text-center bg-success text-white h5 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper pt-2 pl-2">
 				<form onSubmit={(e) => handleSubmit(e, rootConst.REPORTSCHECKADMINSEARCHAPI, '/klug_app/public/reportsCheckAdmin', [formData.last_week], true)}>
 					<input type="text" name="name" value={formData.name} className="mr-1" onChange={(e) => handleChange(e)} style={{ width: '80px' }} maxLength={24}

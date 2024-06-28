@@ -27,11 +27,11 @@ const userEdit = () => {
 			setFormData({
 				users: data?.users || [],
 				msg: data?.msg || '',
-				sName: data?.sName || '',         
-				AdminAuth: '',         
-				CheckAuth: '',         
-				eName: '',         
-				eId: '',         
+				sName: data?.sName || '',
+				AdminAuth: '',
+				CheckAuth: '',
+				eName: '',
+				eId: '',
 			});
 		}
 	}, [data]);
@@ -41,7 +41,7 @@ const userEdit = () => {
 		const { name, checked } = e.target;
 		setFormData(prevData => ({
 			...prevData,
-			users: prevData.users.map((user:any) =>
+			users: prevData.users.map((user: any) =>
 				user.id === id ? { ...user, [name]: checked } : user
 			),
 		}));
@@ -59,40 +59,42 @@ const userEdit = () => {
 	const navigate = useNavigate();
 
 	// フォームの送信ハンドラ
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, url: string, redirectURL: string, arr:any) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, url: string, redirectURL: string, arr: any) => {
 		e.preventDefault();
-
-		if(arr) {
-			formData.AdminAuth = arr[0];
-			formData.CheckAuth = arr[1];
-			formData.eName = arr[2];
-			formData.eId = arr[3];
-		}
-		try {
-			// csfrトークンを取得してヘッダーに追加する
-			const csrfToken = getCsrfToken();
-			axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
-			// APIエンドポイントにPOSTリクエストを送信
-			const response = await axios.post(url, formData);
-			const fetchedData = response.data;
-
-			if (response.status === 200) {
-				// 成功した場合、適切なページにリダイレクト
-				navigate(redirectURL, { state: { data: fetchedData } });
-			} else {
-				console.error('Error Happen');
+		if (url === rootConst.USEREDITDELETEAPI ? window.confirm('このユーザーを削除しますか？') : window.confirm('権限の変更を行いますか？')) {
+			if (arr) {
+				formData.AdminAuth = arr[0];
+				formData.CheckAuth = arr[1];
+				formData.eName = arr[2];
+				formData.eId = arr[3];
 			}
-		} catch (error) {
-			console.error('Error submitting form:', error);
+			
+			try {
+				// csfrトークンを取得してヘッダーに追加する
+				const csrfToken = getCsrfToken();
+				axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
+				// APIエンドポイントにPOSTリクエストを送信
+				const response = await axios.post(url, formData);
+				const fetchedData = response.data;
+
+				if (response.status === 200) {
+					// 成功した場合、適切なページにリダイレクト
+					navigate(redirectURL, { state: { data: fetchedData } });
+				} else {
+					console.error('Error Happen');
+				}
+			} catch (error) {
+				console.error('Error submitting form:', error);
+			}
 		}
 	};
 
 	// 型アサーションを使って state の型を指定
 	return (
 		<>
-			<Header label='ユーザー編集' leftBtn='back_btn' subHeaderProp='text-center bg-secondary text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
+			<Header label='ユーザー編集' leftBtn='back_btn' subHeaderProp='text-center bg-secondary text-white h5 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper px-0 mx-0 ">
-			{formData.msg && <p className='text-danger pt-1'>{formData.msg}</p>}
+				{formData.msg && <p className='text-success pt-1'>{formData.msg}</p>}
 				<form className='mt-2 ml-4' onSubmit={(e) => handleSubmit(e, rootConst.USEREDITSEARCHAPI, '/klug_app/public/userEdit', false)}>
 					<input type="text" name="sName" onChange={(e) => handleChange(e)} style={{ width: '80px' }} maxLength={24}
 						placeholder="NAME" />
@@ -118,12 +120,12 @@ const userEdit = () => {
 										<input type="checkbox" name="checkAuth" checked={user.checkAuth} onChange={(e) => change(e, user.id)} />
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITEDITAPI, '/klug_app/public/userEdit', [user.adminAuth , user.checkAuth, user.name, user.id])}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITEDITAPI, '/klug_app/public/userEdit', [user.adminAuth, user.checkAuth, user.name, user.id])}>
 											<button className="btn-secondary mb-1" type="submit">変更</button>
 										</form>
 									</td>
 									<td className='check_td'>
-										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITDELETEAPI, '/klug_app/public/userEdit', [user.adminAuth , user.checkAuth, user.name, user.id])}>
+										<form onSubmit={(e) => handleSubmit(e, rootConst.USEREDITDELETEAPI, '/klug_app/public/userEdit', [user.adminAuth, user.checkAuth, user.name, user.id])}>
 											<button className="btn-danger mb-1" type="submit">削除</button>
 										</form>
 									</td>

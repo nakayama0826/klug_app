@@ -170,7 +170,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Header label='トップページ' leftBtn='logout_btn' subHeaderProp='text-center bg-success text-white h4 py-2 mb-0' leftBtnProp='fa-solid fa-door-open' />
+      <Header label='トップページ' leftBtn='logout_btn' subHeaderProp='text-center bg-success text-white h5 py-2 mb-0' leftBtnProp='fa-solid fa-door-open' />
       <div className="wrapper">
         <main>
           <UserInfo user={user?.name ?? ""} Department={user?.Department ?? ""} classPro="bg-success text-white" />
@@ -192,7 +192,7 @@ const Home: React.FC = () => {
             />
             <br />
           </div>
-          <button onClick={() => clickButton(false)} className='btn btn-info mb-2 buttonW'><i className="fa-solid fa-download">資料ダウンロード</i></button>
+          <button onClick={() => clickButton(false)} className='btn btn-success mb-2 buttonW'><i className="fa-solid fa-download">資料ダウンロード</i></button>
           <div style={dawnloadButtonStyle}>
             <DownLoadButton  
              DownLoadButtonProps={todokede}

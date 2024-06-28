@@ -30,7 +30,7 @@ const header: React.FC<HeaderProps> = ({label, leftBtn, subHeaderProp, leftBtnPr
 			<form id="logout_form" method="POST" action="/" className="inline">
 				<button type="submit" className="underline text-sm text-gray-600 hover:text-gray-900 ml-2"></button>
 			</form>
-			<img id="klug_logo" src='./images/klug_logo.jpg' onClick={()=>handleLogoClick()} alt="Klug Logo" />
+			<img id="klug_logo" className="pr-3" src='./images/klug_logo.jpg' onClick={()=>handleLogoClick()} alt="Klug Logo" />
 			<i id="menu_tab" className="fa-solid fa-ellipsis"></i>
 		</header>
 		<div className={subHeaderProp}>
