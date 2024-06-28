@@ -9,7 +9,6 @@ interface props {
 }
 
 const DownLoadButton: React.FC<props> = ({ DownLoadButtonProps }) => {
-	// TODO
 	const showButton = document.getElementById(DownLoadButtonProps.showButton); // 表示ボタン
 	const closeButton = document.getElementById(DownLoadButtonProps.closeButton); // 閉じるボタン
 	const dialog: HTMLDialogElement = document.getElementById(DownLoadButtonProps.dialog) as HTMLDialogElement;

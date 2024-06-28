@@ -117,7 +117,7 @@ const ReportsPost = () => {
 
 	return (
 		<>
-			<Header label={!formData.newPost ? '週報提出(更新)' : '週報提出'} leftBtn='back_btn' subHeaderProp={`text-center ${!formData.newPost ? 'bg-warning' : 'bg-success'} text-white h4 py-2 mb-0`} leftBtnProp="fa-solid fa-backward-step" />
+			<Header label={!formData.newPost ? '週報提出(更新)' : '週報提出'} leftBtn='back_btn' subHeaderProp={`text-center ${!formData.newPost ? 'bg-warning' : 'bg-success'} text-white h5 py-2 mb-0`} leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper">
 				<div className="post_container pt-1 px-0">
 					{error && <p className='text-danger'>{error}</p>}

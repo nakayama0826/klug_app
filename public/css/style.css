@@ -47,8 +47,8 @@ header
 }
 
 #klug_logo {
-	width: 140px;
-	height: 35px;
+	width: 165px;
+	height: 40px;
 	margin: 0 auto;
 	/* 画像を水平中央に配置 */
 }
@@ -176,7 +176,7 @@ input[type="text"] {
 }
 
 .btn-info-sub {
-	background-color: #13b8ad;
+	background-color: #1fc7bc;
 	color: #ffffff;
 }
 

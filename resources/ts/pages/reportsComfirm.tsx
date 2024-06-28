@@ -31,7 +31,7 @@ const ReportsComfirm = () => {
 
 	return (
 		<>
-			<Header label='週報確認' leftBtn='back_btn' subHeaderProp='text-center btn-primary text-white h4 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
+			<Header label='週報確認' leftBtn='back_btn' subHeaderProp='text-center btn-primary text-white h5 py-2 mb-0' leftBtnProp="fa-solid fa-backward-step" />
 			<div className="wrapper">
 				<div className="post_container pt-1 px-0">
 					<div className="form_info">
