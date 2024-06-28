@@ -26,7 +26,7 @@ const logoEl = document.getElementById('klug_logo');
 if (logoEl !== null) {
     logoEl.addEventListener('click', function () {
         // ホーム画面にリダイレクト
-        window.location.href = "http://klgsmhsnitool.gulk.co.jp";
+        window.location.href = "https://klgsmhsnitool.gulk.co.jp";
     })
 }
 
