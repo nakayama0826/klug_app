@@ -8,7 +8,6 @@ import axios from "axios";
 import { Outlet } from "react-router-dom";
 import Home from "../pages/home";
 import handleBackClick from "../function/handleBackClick";
-import { getCsrfToken } from "../function/getCsrfToken";
 
 const Admin: React.FC = () => {
   const [user, setUser] = useState<UserProps | null>(null);
@@ -17,7 +16,7 @@ const Admin: React.FC = () => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const response = await axios.get('http://klgsmhsnitool.gulk.co.jp/getUser');
+				const response = await axios.get('https://klgsmhsnitool.gulk.co.jp/getUser');
 				const data = response.data;
 				// 必要なデータを整形
 				const user = {
@@ -37,11 +36,11 @@ const Admin: React.FC = () => {
   }, []);
 
   const onClickRegister = () => {
-    window.location.href = 'http://klgsmhsnitool.gulk.co.jp/register';
+    window.location.href = 'https://klgsmhsnitool.gulk.co.jp/register';
   }
 
   const onClickHome = () => {
-    window.location.href = 'http://klgsmhsnitool.gulk.co.jp';
+    window.location.href = 'https://klgsmhsnitool.gulk.co.jp';
   }
 
   // ボタンコンポーネントに渡す用のプロパティを設定する

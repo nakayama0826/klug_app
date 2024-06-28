@@ -25,7 +25,7 @@
 		    // 条件をチェック
 		    if (data.adminAuth !== 1) {
 			console.error('アクセスが許可されていません。');
-			window.location.href = "http://klgsmhsnitool.gulk.co.jp";
+			window.location.href = "https://klgsmhsnitool.gulk.co.jp";
 		    } else {
 			document.getElementById('hiddenContents').classList.remove('display-hidden');
 		    }
