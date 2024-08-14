@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reportsPost;
+use DateTime;
 
 class ReportsPostController extends Controller
 {
@@ -29,10 +30,16 @@ class ReportsPostController extends Controller
             ['key_number', '=', $this->get_key_number() - 1]
         ])->first();
 
-        // 今日の日付をフォーマットして値を返却する
-        $today = Carbon::today()->format('Y年m月d日');
-
         $newPost = empty($reportsPost);
+
+        // 編集時と登録時で表示する値を変更する
+        if($newPost){
+            $today = Carbon::now()->setTimezone('Asia/Tokyo')->format('Y年m月d日 H時i分');
+        } else {
+            $dateTime = new DateTime($reportsPost->reporting_time);
+            // フォーマットの変換 YYYY/MM/DD HH:II
+            $today = $dateTime->format('Y年m月d日H時i分');
+        }
 
         $key_number = $this->get_key_number();
 
@@ -56,7 +63,7 @@ class ReportsPostController extends Controller
         $reports_post_data->post = $request->input('post'); // 投稿
         $reports_post_data->concern = $request->input('concern'); // 懸念点
         $reports_post_data->schedule = $request->input('schedule'); // 来週の予定
-        $reports_post_data->reporting_date = $request->input('reporting_date'); // 報告日
+        $reports_post_data->reporting_date = Carbon::now()->setTimezone('Asia/Tokyo'); // 報告日
         $reports_post_data->work_day1 = $request->input('work_day1'); // 出勤日1
         $reports_post_data->start_time1 = $request->input('start_time1'); // 出社時刻1
         $reports_post_data->end_time1 = $request->input('end_time1'); // 退社時刻1
@@ -80,6 +87,17 @@ class ReportsPostController extends Controller
         $reports_post_data->end_time7 = $request->input('end_time7'); // 退社時刻7
         $reports_post_data->first_day = $request->input('first_day'); // 作業期間1
         $reports_post_data->last_day = $request->input('last_day'); // 作業期間2
+        
+        // 追加カラム
+        $reports_post_data->work_style1 = $request->input('work_style1'); // 作業形態1
+        $reports_post_data->work_style2 = $request->input('work_style2'); // 作業形態2
+        $reports_post_data->work_style3 = $request->input('work_style3'); // 作業形態3
+        $reports_post_data->work_style4 = $request->input('work_style4'); // 作業形態4
+        $reports_post_data->work_style5 = $request->input('work_style5'); // 作業形態5
+        $reports_post_data->work_style6 = $request->input('work_style6'); // 作業形態6
+        $reports_post_data->work_style7 = $request->input('work_style7'); // 作業形態7
+    
+        $reports_post_data->reporting_time = Carbon::now()->setTimezone('Asia/Tokyo'); // 報告時間
 
         $reports_post_data->save();
 
@@ -96,7 +114,7 @@ class ReportsPostController extends Controller
                 'post' => $request->input('post'), // 投稿
                 'concern' => $request->input('concern'), // 懸念点
                 'schedule' => $request->input('schedule'), // 来週の予定
-                'reporting_date' => $request->input('reporting_date'), // 報告日
+                'reporting_date' => Carbon::now()->setTimezone('Asia/Tokyo'), // 報告日
                 'work_day1' => $request->input('work_day1'), // 出勤日1
                 'start_time1' => $request->input('start_time1'), // 出社時刻1
                 'end_time1' => $request->input('end_time1'), // 退社時刻1
@@ -120,6 +138,15 @@ class ReportsPostController extends Controller
                 'end_time7' => $request->input('end_time7'), // 退社時刻7
                 'first_day' => $request->input('first_day'), // 作業期間1
                 'last_day' => $request->input('last_day'), // 作業期間2
+                
+                // 追加カラム
+                'work_style1' => $request->input('work_style1'), // 労働形態1
+                'work_style2' => $request->input('work_style2'), // 労働形態2
+                'work_style3' => $request->input('work_style3'), // 労働形態3
+                'work_style4' => $request->input('work_style4'), // 労働形態4
+                'work_style5' => $request->input('work_style5'), // 労働形態5
+                'work_style6' => $request->input('work_style6'), // 労働形態6
+                'work_style7' => $request->input('work_style7'), // 労働形態7
             ]);
 
         return response()->json(['message' => 'Data processed successfully'], 200);

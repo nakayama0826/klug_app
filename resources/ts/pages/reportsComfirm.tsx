@@ -9,24 +9,23 @@ const ReportsComfirm = () => {
 	// 画面遷移してきた時の値を設定する
 	const location = useLocation();
 	const { data } = location.state as { data: any };
-	console.log(data);
 
 	// useStateフックでフォームの初期値を設定:
 	const [formData] = useState({
 		name: data?.reportsPost?.name || '',
-		today: data?.reportsPost?.reporting_date,
+		today: data?.today,
 		first_day: data?.reportsPost?.first_day || '',
 		last_day: data?.reportsPost?.last_day || '',
 		post: data?.reportsPost?.post || '',
 		concern: data?.reportsPost?.concern || '',
 		schedule: data?.reportsPost?.schedule || '',
-		work_day1: data?.reportsPost?.work_day1 || '', start_time1: data?.reportsPost?.start_time1 || '', end_time1: data?.reportsPost?.end_time1 || '',
-		work_day2: data?.reportsPost?.work_day2 || '', start_time2: data?.reportsPost?.start_time2 || '', end_time2: data?.reportsPost?.end_time2 || '',
-		work_day3: data?.reportsPost?.work_day3 || '', start_time3: data?.reportsPost?.start_time3 || '', end_time3: data?.reportsPost?.end_time3 || '',
-		work_day4: data?.reportsPost?.work_day4 || '', start_time4: data?.reportsPost?.start_time4 || '', end_time4: data?.reportsPost?.end_time4 || '',
-		work_day5: data?.reportsPost?.work_day5 || '', start_time5: data?.reportsPost?.start_time5 || '', end_time5: data?.reportsPost?.end_time5 || '',
-		work_day6: data?.reportsPost?.work_day6 || '', start_time6: data?.reportsPost?.start_time6 || '', end_time6: data?.reportsPost?.end_time6 || '',
-		work_day7: data?.reportsPost?.work_day7 || '', start_time7: data?.reportsPost?.start_time7 || '', end_time7: data?.reportsPost?.end_time7 || '',
+		work_day1: data?.reportsPost?.work_day1 || '', start_time1: data?.reportsPost?.start_time1 || '', end_time1: data?.reportsPost?.end_time1 || '', work_style1: data?.reportsPost?.work_style1 || '',
+		work_day2: data?.reportsPost?.work_day2 || '', start_time2: data?.reportsPost?.start_time2 || '', end_time2: data?.reportsPost?.end_time2 || '', work_style2: data?.reportsPost?.work_style2 || '',
+		work_day3: data?.reportsPost?.work_day3 || '', start_time3: data?.reportsPost?.start_time3 || '', end_time3: data?.reportsPost?.end_time3 || '', work_style3: data?.reportsPost?.work_style3 || '',
+		work_day4: data?.reportsPost?.work_day4 || '', start_time4: data?.reportsPost?.start_time4 || '', end_time4: data?.reportsPost?.end_time4 || '', work_style4: data?.reportsPost?.work_style4 || '',
+		work_day5: data?.reportsPost?.work_day5 || '', start_time5: data?.reportsPost?.start_time5 || '', end_time5: data?.reportsPost?.end_time5 || '', work_style5: data?.reportsPost?.work_style5 || '',
+		work_day6: data?.reportsPost?.work_day6 || '', start_time6: data?.reportsPost?.start_time6 || '', end_time6: data?.reportsPost?.end_time6 || '', work_style6: data?.reportsPost?.work_style6 || '',
+		work_day7: data?.reportsPost?.work_day7 || '', start_time7: data?.reportsPost?.start_time7 || '', end_time7: data?.reportsPost?.end_time7 || '', work_style7: data?.reportsPost?.work_style7 || '',
 	});
 
 	return (
@@ -74,12 +73,9 @@ const ReportsComfirm = () => {
 										<textarea className="border_textarea" name="schedule" value={formData.schedule} readOnly></textarea>
 									</td>
 								</tr>
-								<tr>
-									<td>今週の作業時間</td>
-								</tr>
 							</tbody>
 						</table>
-
+						<div className='h6'>今週の作業時間 (※テレワークの場合は✔️)</div>
 						<div className="row pb-2">
 							<div className="col-5">
 								<input id="work_day1" type="date" name="work_day1" value={formData.work_day1} readOnly />
@@ -89,6 +85,9 @@ const ReportsComfirm = () => {
 							</div>
 							<div className="col-3">
 								<input id="end_time1" type="time" name="end_time1" value={formData.end_time1} readOnly />
+							</div>
+							<div className="col-1">
+								<input id="work_style1" type="checkbox" name="work_style1" checked={formData.work_style1} readOnly/>
 							</div>
 						</div>
 						<div className="row pb-2">
@@ -101,6 +100,9 @@ const ReportsComfirm = () => {
 							<div className="col-3">
 								<input id="end_time2" type="time" name="end_time2" value={formData.end_time2} readOnly />
 							</div>
+							<div className="col-1">
+								<input id="work_style2" type="checkbox" name="work_style2" checked={formData.work_style2} readOnly />
+							</div>
 						</div>
 						<div className="row pb-2">
 							<div className="col-5">
@@ -111,6 +113,9 @@ const ReportsComfirm = () => {
 							</div>
 							<div className="col-3">
 								<input id="end_time3" type="time" name="end_time3" value={formData.end_time3} readOnly />
+							</div>
+							<div className="col-1">
+								<input id="work_style3" type="checkbox" name="work_style3" checked={formData.work_style3} readOnly />
 							</div>
 						</div>
 						<div className="row pb-2">
@@ -123,6 +128,9 @@ const ReportsComfirm = () => {
 							<div className="col-3">
 								<input id="end_time4" type="time" name="end_time4" value={formData.end_time4} readOnly />
 							</div>
+							<div className="col-1">
+								<input id="work_style4" type="checkbox" name="work_style4" checked={formData.work_style4} readOnly />
+							</div>
 						</div>
 						<div className="row pb-2">
 							<div className="col-5">
@@ -133,6 +141,9 @@ const ReportsComfirm = () => {
 							</div>
 							<div className="col-3">
 								<input id="end_time5" type="time" name="end_time5" value={formData.end_time5} readOnly />
+							</div>
+							<div className="col-1">
+								<input id="work_style5" type="checkbox" name="work_style5" checked={formData.work_style5} readOnly />
 							</div>
 						</div>
 						<div className="row pb-2">
@@ -145,6 +156,9 @@ const ReportsComfirm = () => {
 							<div className="col-3">
 								<input id="end_time6" type="time" name="end_time6" value={formData.end_time6} readOnly />
 							</div>
+							<div className="col-1">
+								<input id="work_style6" type="checkbox" name="work_style6" checked={formData.work_style6} readOnly />
+							</div>
 						</div>
 						<div className="row pb-2">
 							<div className="col-5">
@@ -155,6 +169,9 @@ const ReportsComfirm = () => {
 							</div>
 							<div className="col-3">
 								<input id="end_time7" type="time" name="end_time7" value={formData.end_time7} readOnly />
+							</div>
+							<div className="col-1">
+								<input id="work_style7" type="checkbox" name="work_style7" checked={formData.work_style7} readOnly />
 							</div>
 						</div>
 

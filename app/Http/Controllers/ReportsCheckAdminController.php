@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reportsPost;
+use DateTime;
 
 class reportsCheckAdminController extends Controller
 {
@@ -118,9 +119,14 @@ class reportsCheckAdminController extends Controller
             ['key_number', '=', $request->input('key_number')]
         ])->first();
 
+        $dateTime = new DateTime($reportsPost->reporting_time);
+        // フォーマットの変換 YYYY/MM/DD HH:II
+        $today = $dateTime->format('Y年m月d日H時i分');
+
         // 普通のユーザーと共通のbaldeへと返す
         return response()->json([
             'reportsPost' => $reportsPost,
+            'today' => $today,
         ]);
     }
 

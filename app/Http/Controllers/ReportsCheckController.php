@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reportsPost;
+use DateTime;
 
 class ReportsCheckController extends Controller
 {
@@ -97,6 +98,8 @@ class ReportsCheckController extends Controller
             // 未提出の投稿を提出ボタンから渡ってきた場合はここを通る
             $key_number = $this->get_key_number() - 1;
             $newPost = true;
+            // 今日の日付をフォーマットして値を返却する
+            $today = Carbon::now()->setTimezone('Asia/Tokyo')->format('Y年m月d日 H時i分');
         } else {
             $key_number = $request->input('key_number');
             $newPost = false;
@@ -109,8 +112,12 @@ class ReportsCheckController extends Controller
             ['key_number', '=', $request->input('key_number')]
         ])->first();
 
-        // 今日の日付をフォーマットして値を返却する
-        $today = Carbon::today()->format('Y年m月d日');
+        // 過去の週報を編集する場合は日付を投稿日時に設定する
+        if(!$newPost) {
+            $dateTime = new DateTime($reportsPost->reporting_time);
+            // フォーマットの変換 YYYY/MM/DD HH:II
+            $today = $dateTime->format('Y年m月d日H時i分');
+        }
 
         return response()->json([
             'user' => $user,
@@ -127,16 +134,21 @@ class ReportsCheckController extends Controller
         // ユーザー情報の取得
         $user = Auth::user();
 
+        
         // 週報確認で選択された週報を取得する
         $reportsPost = reportsPost::where([
             ['name', '=', $user->name],
             ['name_id', '=', $user->id],
             ['key_number', '=', $request->input('key_number')]
-        ])->first();
-
-        // return view('comfirmPost', compact('reportsPost'));
+            ])->first();
+        
+        $dateTime = new DateTime($reportsPost->reporting_time);
+        // フォーマットの変換 YYYY/MM/DD HH:II
+        $today = $dateTime->format('Y年m月d日H時i分');
+        
         return response()->json([
             'user' => $user,
+            'today' => $today,
             'reportsPost' => $reportsPost,
         ]);
     }
