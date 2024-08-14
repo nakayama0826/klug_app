@@ -6686,6 +6686,79 @@ exports["default"] = Button;
 
 /***/ }),
 
+/***/ "./resources/ts/components/downLoadButton.tsx":
+/*!****************************************************!*\
+  !*** ./resources/ts/components/downLoadButton.tsx ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+var js_file_download_1 = __importDefault(__webpack_require__(/*! js-file-download */ "./node_modules/js-file-download/file-download.js"));
+var DownLoadButton = function DownLoadButton(_ref) {
+  var DownLoadButtonProps = _ref.DownLoadButtonProps;
+  var showButton = document.getElementById(DownLoadButtonProps.showButton); // 表示ボタン
+  var closeButton = document.getElementById(DownLoadButtonProps.closeButton); // 閉じるボタン
+  var dialog = document.getElementById(DownLoadButtonProps.dialog);
+  // 表示ボタンをクリック時したとき、
+  showButton === null || showButton === void 0 ? void 0 : showButton.addEventListener("click", function () {
+    // モーダルを開く
+    dialog === null || dialog === void 0 ? void 0 : dialog.showModal();
+  });
+  // 閉じるボタンをクリック時したとき、
+  closeButton === null || closeButton === void 0 ? void 0 : closeButton.addEventListener("click", function () {
+    // モーダルを閉じる
+    dialog === null || dialog === void 0 ? void 0 : dialog.close();
+  });
+  var handleClickOk = function handleClickOk(url, filename) {
+    axios_1["default"].get(url, {
+      responseType: 'blob'
+    }).then(function (res) {
+      (0, js_file_download_1["default"])(res.data, filename);
+      dialog === null || dialog === void 0 ? void 0 : dialog.close();
+    });
+  };
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("button", {
+    id: DownLoadButtonProps.showButton,
+    type: 'button',
+    className: DownLoadButtonProps.classPro
+  }, react_1["default"].createElement("i", {
+    className: DownLoadButtonProps.fontAwesome
+  }), DownLoadButtonProps.fileName), react_1["default"].createElement("dialog", {
+    id: DownLoadButtonProps.dialog,
+    className: 'w-75'
+  }, react_1["default"].createElement("div", null, "\u30FB", DownLoadButtonProps.fileName, "\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u3057\u307E\u3059\u304B\uFF1F"), react_1["default"].createElement("img", {
+    src: "./images/".concat(DownLoadButtonProps.fileName, ".jpg"),
+    alt: ""
+  }), react_1["default"].createElement("div", {
+    className: "mr-auto d-flex justify-content-end"
+  }, react_1["default"].createElement("button", {
+    type: "button",
+    className: 'btn btn-primary',
+    onClick: function onClick() {
+      return handleClickOk("http://localhost/klug_app/public/dlc/".concat(DownLoadButtonProps.fileName, ".").concat(DownLoadButtonProps.fileNameType), "".concat(DownLoadButtonProps.fileName, ".").concat(DownLoadButtonProps.fileNameType));
+    }
+  }, "Ok"), react_1["default"].createElement("button", {
+    id: DownLoadButtonProps.closeButton,
+    className: 'btn ml-1',
+    type: "button"
+  }, "Cancel"))));
+};
+exports["default"] = DownLoadButton;
+
+/***/ }),
+
 /***/ "./resources/ts/components/header.tsx":
 /*!********************************************!*\
   !*** ./resources/ts/components/header.tsx ***!
@@ -6707,10 +6780,13 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var handleLogoutClick_1 = __importDefault(__webpack_require__(/*! ../function/handleLogoutClick */ "./resources/ts/function/handleLogoutClick.tsx"));
 var handleBackClick_1 = __importDefault(__webpack_require__(/*! ../function/handleBackClick */ "./resources/ts/function/handleBackClick.tsx"));
 var handleLogoClick_1 = __importDefault(__webpack_require__(/*! ../function/handleLogoClick */ "./resources/ts/function/handleLogoClick.tsx"));
+// ヘッダーのクリックされたアイコンの種類に応じて処理を変える
 var funcInterface = function funcInterface(leftBtnProp) {
   if (leftBtnProp === 'fa-solid fa-door-open') {
+    // ログアウトボタン
     (0, handleLogoutClick_1["default"])();
   } else {
+    // それ以外であれば戻る
     (0, handleBackClick_1["default"])();
   }
 };
@@ -6742,6 +6818,7 @@ var header = function header(_ref) {
     className: "underline text-sm text-gray-600 hover:text-gray-900 ml-2"
   })), react_1["default"].createElement("img", {
     id: "klug_logo",
+    className: "pr-3",
     src: './images/klug_logo.jpg',
     onClick: function onClick() {
       return (0, handleLogoClick_1["default"])();
@@ -7340,7 +7417,7 @@ var Admin = function Admin() {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u7BA1\u7406\u8005\u7528\u30DA\u30FC\u30B8",
     leftBtn: 'logout_admin_btn',
-    subHeaderProp: 'text-center bg-secondary text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center bg-secondary text-white h5 py-2 mb-0',
     leftBtnProp: 'fa-solid fa-door-open'
   }), react_1["default"].createElement("div", {
     className: "wrapper"
@@ -7513,9 +7590,12 @@ var dataDelete = function dataDelete() {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             e.preventDefault(); // デフォルトのフォーム送信を防止
-            // バリデーションチェック
+            if (!window.confirm('週報の削除を行いますか？')) {
+              _context.next = 18;
+              break;
+            }
             if (!(formData.sYear === '' || formData.sMonth === '' || formData.eYear === '' || formData.eMonth === '')) {
-              _context.next = 4;
+              _context.next = 5;
               break;
             }
             setFormData(function (prevState) {
@@ -7524,15 +7604,15 @@ var dataDelete = function dataDelete() {
               });
             });
             return _context.abrupt("return");
-          case 4:
-            _context.prev = 4;
+          case 5:
+            _context.prev = 5;
             // csfrトークンを取得してヘッダーに追加する
             csrfToken = (0, getCsrfToken_1.getCsrfToken)();
             axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
             // APIエンドポイントにPOSTリクエストを送信
-            _context.next = 9;
+            _context.next = 10;
             return axios_1["default"].post(url, formData);
-          case 9:
+          case 10:
             response = _context.sent;
             fetchedData = response.data;
             if (response.status === 200) {
@@ -7545,24 +7625,24 @@ var dataDelete = function dataDelete() {
             } else {
               console.error('Error Happen');
             }
-            _context.next = 17;
+            _context.next = 18;
             break;
-          case 14:
-            _context.prev = 14;
-            _context.t0 = _context["catch"](4);
+          case 15:
+            _context.prev = 15;
+            _context.t0 = _context["catch"](5);
             console.error('Error submitting form:', _context.t0);
-          case 17:
+          case 18:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[4, 14]]);
+      }, _callee, null, [[5, 15]]);
     }));
   };
   // 型アサーションを使って state の型を指定
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u30C7\u30FC\u30BF\u524A\u9664",
     leftBtn: 'back_btn',
-    subHeaderProp: 'text-center bg-secondary text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center bg-secondary text-white h5 py-2 mb-0',
     leftBtnProp: "fa-solid fa-backward-step"
   }), react_1["default"].createElement("div", {
     className: "wrapper pl-2 pt-2"
@@ -7572,7 +7652,9 @@ var dataDelete = function dataDelete() {
     onSubmit: function onSubmit(e) {
       return handleSubmit(e, rootConst_1.rootConst.DATADELETEDLETEAPI, "/klug_app/public/dataDelete");
     }
-  }, react_1["default"].createElement("input", {
+  }, react_1["default"].createElement("label", {
+    className: "badge badge-danger mr-1"
+  }, "\u5FC5\u9808"), react_1["default"].createElement("input", {
     type: "text",
     id: "sYear",
     name: "sYear",
@@ -7629,6 +7711,7 @@ var dataDelete = function dataDelete() {
     placeholder: "MM",
     pattern: "\\d{2}"
   }), react_1["default"].createElement("button", {
+    id: "showButton",
     type: "submit",
     className: "btn-danger ml-2"
   }, "\u524A\u9664"))));
@@ -7723,6 +7806,7 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var button_1 = __importDefault(__webpack_require__(/*! ../components/button */ "./resources/ts/components/button.tsx"));
+var downLoadButton_1 = __importDefault(__webpack_require__(/*! ../components/downLoadButton */ "./resources/ts/components/downLoadButton.tsx"));
 var userInfo_1 = __importDefault(__webpack_require__(/*! ../components/userInfo */ "./resources/ts/components/userInfo.tsx"));
 var rootConst_1 = __webpack_require__(/*! ../const/rootConst */ "./resources/ts/const/rootConst.tsx");
 var header_1 = __importDefault(__webpack_require__(/*! ../components/header */ "./resources/ts/components/header.tsx"));
@@ -7735,6 +7819,32 @@ var Home = function Home() {
     _ref2 = _slicedToArray(_ref, 2),
     user = _ref2[0],
     setUser = _ref2[1];
+  // ボタン押下時に切り替えを管理する
+  var _ref3 = (0, react_1.useState)(false),
+    _ref4 = _slicedToArray(_ref3, 2),
+    reportsButton = _ref4[0],
+    setReportsButton = _ref4[1];
+  var _ref5 = (0, react_1.useState)(false),
+    _ref6 = _slicedToArray(_ref5, 2),
+    dawnLoadButton = _ref6[0],
+    setDawnLoadButton = _ref6[1];
+  // ボタンを押した際に表示の切り替えを行う
+  var clickButton = function clickButton(which) {
+    if (which) {
+      setReportsButton(reportsButton ? false : true);
+      setDawnLoadButton(false);
+    } else {
+      setReportsButton(false);
+      setDawnLoadButton(dawnLoadButton ? false : true);
+    }
+  };
+  // 表示の切り替えを行うためのcssオブジェクト
+  var reportsButtonStyle = {
+    display: reportsButton ? 'block' : 'none'
+  };
+  var dawnloadButtonStyle = {
+    display: dawnLoadButton ? 'block' : 'none'
+  };
   // 画面が読み込まれたら実行する処理：APIを呼び出してユーザー情報を取り出す
   (0, react_1.useEffect)(function () {
     var fetchUser = function fetchUser() {
@@ -7781,22 +7891,22 @@ var Home = function Home() {
     label: '週報提出',
     checkAuth: true,
     adminAuth: true,
-    classPro: 'btn btn-success mb-2 buttonW',
+    classPro: 'btn btn-success-sub mb-2 buttonW',
     fontAwesome: 'fa-solid fa-pen-to-square'
   };
   var reportsCheckBtn = {
     label: '週報確認',
     checkAuth: true,
     adminAuth: true,
-    classPro: 'btn btn-success mb-2 buttonW',
+    classPro: 'btn btn-success-sub mb-2 buttonW',
     fontAwesome: 'fa-solid fa-file-import'
   };
   var reportsCheckAdminBtn = {
     label: '週報確認（管理者）',
     checkAuth: user === null || user === void 0 ? void 0 : user.checkAuth,
     adminAuth: true,
-    classPro: 'btn btn-success mb-2 buttonW',
-    fontAwesome: 'fa-solid fa-file-import'
+    classPro: 'btn btn-success-sub mb-2 buttonW',
+    fontAwesome: 'fa-regular fa-eye'
   };
   var AdminBtn = {
     label: '管理者用ページ',
@@ -7804,6 +7914,51 @@ var Home = function Home() {
     adminAuth: user === null || user === void 0 ? void 0 : user.adminAuth,
     classPro: 'btn mb-2 buttonW',
     fontAwesome: 'fa-solid fa-key'
+  };
+  var todokede = {
+    showButton: 'showTodokede',
+    closeButton: 'closeTodokede',
+    dialog: 'todokedeDialog',
+    fileName: '届出書',
+    fileNameType: 'doc',
+    classPro: 'btn btn-info-sub mb-2 buttonW',
+    fontAwesome: 'fa-solid fa-inbox'
+  };
+  var jushohenkou = {
+    showButton: 'showjushohenkou',
+    closeButton: 'closejushohenkou',
+    dialog: 'jushohenkouDialog',
+    fileName: '住所変更届',
+    fileNameType: 'doc',
+    classPro: 'btn btn-info-sub mb-2 buttonW',
+    fontAwesome: 'fa-solid fa-house-circle-check'
+  };
+  var tuukinteiki = {
+    showButton: 'showtuukinteiki',
+    closeButton: 'closetuukinteiki',
+    dialog: 'tuukinteikiDialog',
+    fileName: '通勤定期申請書',
+    fileNameType: 'xls',
+    classPro: 'btn btn-info-sub mb-2 buttonW',
+    fontAwesome: 'fa-solid fa-ticket'
+  };
+  var keihiseisan = {
+    showButton: 'showkeihiseisan',
+    closeButton: 'closekeihiseisan',
+    dialog: 'keihiseisanDialog',
+    fileName: '経費精算書',
+    fileNameType: 'xls',
+    classPro: 'btn btn-info-sub mb-2 buttonW',
+    fontAwesome: 'fa-solid fa-comment-dollar'
+  };
+  var koutuuhiseisan = {
+    showButton: 'showkoutuuhiseisan',
+    closeButton: 'closekoutuuhiseisan',
+    dialog: 'koutuuhiseisanDialog',
+    fileName: '小口交通費精算書',
+    fileNameType: 'xlsx',
+    classPro: 'btn btn-info-sub mb-2 buttonW',
+    fontAwesome: 'fa-solid fa-train-subway'
   };
   var reportsPostPrm = {
     requestURL: rootConst_1.rootConst.REPORTSPOSTAPI,
@@ -7824,7 +7979,7 @@ var Home = function Home() {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u30C8\u30C3\u30D7\u30DA\u30FC\u30B8",
     leftBtn: 'logout_btn',
-    subHeaderProp: 'text-center bg-success text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center bg-success text-white h5 py-2 mb-0',
     leftBtnProp: 'fa-solid fa-door-open'
   }), react_1["default"].createElement("div", {
     className: "wrapper"
@@ -7832,7 +7987,16 @@ var Home = function Home() {
     user: (_a = user === null || user === void 0 ? void 0 : user.name) !== null && _a !== void 0 ? _a : "",
     Department: (_b = user === null || user === void 0 ? void 0 : user.Department) !== null && _b !== void 0 ? _b : "",
     classPro: "bg-success text-white"
-  }), react_1["default"].createElement(button_1["default"], {
+  }), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return clickButton(true);
+    },
+    className: 'btn btn-success mb-2 buttonW'
+  }, react_1["default"].createElement("i", {
+    className: 'fa-solid fa-note-sticky'
+  }, "\u9031\u5831")), react_1["default"].createElement("div", {
+    style: reportsButtonStyle
+  }, react_1["default"].createElement(button_1["default"], {
     ButtonProps: reportsPostBtn,
     HttpRequestProps: reportsPostPrm
   }), react_1["default"].createElement("br", null), react_1["default"].createElement(button_1["default"], {
@@ -7841,7 +8005,26 @@ var Home = function Home() {
   }), react_1["default"].createElement("br", null), react_1["default"].createElement(button_1["default"], {
     ButtonProps: reportsCheckAdminBtn,
     HttpRequestProps: reportsCheckAdminPrm
-  }), react_1["default"].createElement("br", null), react_1["default"].createElement(button_1["default"], {
+  }), react_1["default"].createElement("br", null)), react_1["default"].createElement("button", {
+    onClick: function onClick() {
+      return clickButton(false);
+    },
+    className: 'btn btn-success mb-2 buttonW'
+  }, react_1["default"].createElement("i", {
+    className: "fa-solid fa-download"
+  }, "\u8CC7\u6599\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9")), react_1["default"].createElement("div", {
+    style: dawnloadButtonStyle
+  }, react_1["default"].createElement(downLoadButton_1["default"], {
+    DownLoadButtonProps: todokede
+  }), react_1["default"].createElement(downLoadButton_1["default"], {
+    DownLoadButtonProps: jushohenkou
+  }), react_1["default"].createElement(downLoadButton_1["default"], {
+    DownLoadButtonProps: tuukinteiki
+  }), react_1["default"].createElement(downLoadButton_1["default"], {
+    DownLoadButtonProps: keihiseisan
+  }), react_1["default"].createElement(downLoadButton_1["default"], {
+    DownLoadButtonProps: koutuuhiseisan
+  })), react_1["default"].createElement(button_1["default"], {
     ButtonProps: AdminBtn,
     HttpRequestProps: adminPrm
   }), react_1["default"].createElement(react_router_dom_1.Outlet, null))));
@@ -7995,12 +8178,8 @@ var ReportsPost = function ReportsPost() {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             e.preventDefault();
-            // キー情報を設定する
-            setFormData(function (prevData) {
-              return Object.assign(Object.assign({}, prevData), {
-                key_number: num // 更新したいプロパティを上書き
-              });
-            });
+            // 取得したデータをキー番号に設定する
+            formData.key_number = num;
             _context.prev = 2;
             // csfrトークンを取得してヘッダーに追加する
             csrfToken = (0, getCsrfToken_1.getCsrfToken)();
@@ -8038,7 +8217,7 @@ var ReportsPost = function ReportsPost() {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u9031\u5831\u78BA\u8A8D",
     leftBtn: 'back_btn',
-    subHeaderProp: 'text-center bg-success text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center bg-success text-white h5 py-2 mb-0',
     leftBtnProp: "fa-solid fa-backward-step"
   }), react_1["default"].createElement("div", {
     className: "wrapper pt-2"
@@ -8104,7 +8283,7 @@ var ReportsPost = function ReportsPost() {
     className: "red-line"
   })), formData.weekly_reports.map(function (report) {
     return react_1["default"].createElement(react_1["default"].Fragment, {
-      key: report.key_number
+      key: "".concat(report.key_number, "_").concat(report.name_id)
     }, react_1["default"].createElement("tr", null, react_1["default"].createElement("td", {
       className: 'check_td'
     }, "\u9031\u5831"), react_1["default"].createElement("td", {
@@ -8245,16 +8424,16 @@ var ReportsCheckAdmin = function ReportsCheckAdmin() {
       check: (data === null || data === void 0 ? void 0 : data.check) || false,
       // falseで初期化
       name: (data === null || data === void 0 ? void 0 : data.name) || '',
-      // falseで初期化
+      // 空文字で初期化
       id: '',
-      // falseで初期化
+      // 空文字で初期化
       year_input: (data === null || data === void 0 ? void 0 : data.year) || '',
       // デフォルトで現在の年
       month_input: (data === null || data === void 0 ? void 0 : data.month) || '',
       // デフォルトで現在の月（0から始まるため+1）
       msg: (data === null || data === void 0 ? void 0 : data.msg) || '',
       // 空文字で初期化
-      last_week: (data === null || data === void 0 ? void 0 : data.inputCheck) || true // 空文字で初期化
+      last_week: (data === null || data === void 0 ? void 0 : data.inputCheck) || false // falseで初期化
     }),
     _ref2 = _slicedToArray(_ref, 2),
     formData = _ref2[0],
@@ -8271,7 +8450,7 @@ var ReportsCheckAdmin = function ReportsCheckAdmin() {
         year_input: (data === null || data === void 0 ? void 0 : data.year) || '',
         month_input: (data === null || data === void 0 ? void 0 : data.month) || '',
         msg: (data === null || data === void 0 ? void 0 : data.msg) || '',
-        last_week: (data === null || data === void 0 ? void 0 : data.inputCheck) || true
+        last_week: (data === null || data === void 0 ? void 0 : data.inputCheck) || false
       });
     }
   }, [data]);
@@ -8302,7 +8481,6 @@ var ReportsCheckAdmin = function ReportsCheckAdmin() {
           case 0:
             e.preventDefault();
             if (!check) {
-              // TODO
               formData.name = arr[0];
               formData.id = arr[1];
               formData.key_number = arr[2];
@@ -8344,7 +8522,7 @@ var ReportsCheckAdmin = function ReportsCheckAdmin() {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u9031\u5831\u78BA\u8A8D\uFF08\u7BA1\u7406\u8005\u7528\uFF09",
     leftBtn: 'back_btn',
-    subHeaderProp: 'text-center bg-success text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center bg-success text-white h5 py-2 mb-0',
     leftBtnProp: "fa-solid fa-backward-step"
   }), react_1["default"].createElement("div", {
     className: "wrapper pt-2 pl-2"
@@ -8417,7 +8595,7 @@ var ReportsCheckAdmin = function ReportsCheckAdmin() {
     className: "red-line"
   }), formData.weekly_reports.map(function (report) {
     return react_1["default"].createElement(react_1["default"].Fragment, {
-      key: report.key_number
+      key: "".concat(report.key_number, "_").concat(report.name_id)
     }, react_1["default"].createElement("tr", null, react_1["default"].createElement("td", {
       className: 'check_td'
     }, "\u9031\u5831:", report.name), react_1["default"].createElement("td", {
@@ -8508,41 +8686,54 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var handleBackClick_1 = __importDefault(__webpack_require__(/*! ../function/handleBackClick */ "./resources/ts/function/handleBackClick.tsx"));
 // 週報確認用コンポーネント
 var ReportsComfirm = function ReportsComfirm() {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9;
   // 画面遷移してきた時の値を設定する
   var location = (0, react_router_dom_1.useLocation)();
   var data = location.state.data;
   // useStateフックでフォームの初期値を設定:
   var _ref = (0, react_1.useState)({
       name: ((_a = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _a === void 0 ? void 0 : _a.name) || '',
-      today: (_b = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _b === void 0 ? void 0 : _b.reporting_date,
-      first_day: ((_c = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _c === void 0 ? void 0 : _c.first_day) || '',
-      last_day: ((_d = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _d === void 0 ? void 0 : _d.last_day) || '',
-      post: ((_e = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _e === void 0 ? void 0 : _e.post) || '',
-      concern: ((_f = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _f === void 0 ? void 0 : _f.concern) || '',
-      schedule: ((_g = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _g === void 0 ? void 0 : _g.schedule) || '',
-      work_day1: ((_h = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _h === void 0 ? void 0 : _h.work_day1) || '',
-      start_time1: ((_j = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _j === void 0 ? void 0 : _j.start_time1) || '',
-      end_time1: ((_k = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _k === void 0 ? void 0 : _k.end_time1) || '',
+      today: data === null || data === void 0 ? void 0 : data.today,
+      first_day: ((_b = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _b === void 0 ? void 0 : _b.first_day) || '',
+      last_day: ((_c = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _c === void 0 ? void 0 : _c.last_day) || '',
+      post: ((_d = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _d === void 0 ? void 0 : _d.post) || '',
+      concern: ((_e = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _e === void 0 ? void 0 : _e.concern) || '',
+      schedule: ((_f = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _f === void 0 ? void 0 : _f.schedule) || '',
+      work_day1: ((_g = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _g === void 0 ? void 0 : _g.work_day1) || '',
+      start_time1: ((_h = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _h === void 0 ? void 0 : _h.start_time1) || '',
+      end_time1: ((_j = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _j === void 0 ? void 0 : _j.end_time1) || '',
+      work_style1: ((_k = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _k === void 0 ? void 0 : _k.work_style1) || '',
       work_day2: ((_l = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _l === void 0 ? void 0 : _l.work_day2) || '',
       start_time2: ((_m = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _m === void 0 ? void 0 : _m.start_time2) || '',
       end_time2: ((_o = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _o === void 0 ? void 0 : _o.end_time2) || '',
-      work_day3: ((_p = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _p === void 0 ? void 0 : _p.work_day3) || '',
-      start_time3: ((_q = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _q === void 0 ? void 0 : _q.start_time3) || '',
-      end_time3: ((_r = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _r === void 0 ? void 0 : _r.end_time3) || '',
-      work_day4: ((_s = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _s === void 0 ? void 0 : _s.work_day4) || '',
-      start_time4: ((_t = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _t === void 0 ? void 0 : _t.start_time4) || '',
-      end_time4: ((_u = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _u === void 0 ? void 0 : _u.end_time4) || '',
-      work_day5: ((_v = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _v === void 0 ? void 0 : _v.work_day5) || '',
-      start_time5: ((_w = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _w === void 0 ? void 0 : _w.start_time5) || '',
-      end_time5: ((_x = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _x === void 0 ? void 0 : _x.end_time5) || ''
+      work_style2: ((_p = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _p === void 0 ? void 0 : _p.work_style2) || '',
+      work_day3: ((_q = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _q === void 0 ? void 0 : _q.work_day3) || '',
+      start_time3: ((_r = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _r === void 0 ? void 0 : _r.start_time3) || '',
+      end_time3: ((_s = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _s === void 0 ? void 0 : _s.end_time3) || '',
+      work_style3: ((_t = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _t === void 0 ? void 0 : _t.work_style3) || '',
+      work_day4: ((_u = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _u === void 0 ? void 0 : _u.work_day4) || '',
+      start_time4: ((_v = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _v === void 0 ? void 0 : _v.start_time4) || '',
+      end_time4: ((_w = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _w === void 0 ? void 0 : _w.end_time4) || '',
+      work_style4: ((_x = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _x === void 0 ? void 0 : _x.work_style4) || '',
+      work_day5: ((_y = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _y === void 0 ? void 0 : _y.work_day5) || '',
+      start_time5: ((_z = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _z === void 0 ? void 0 : _z.start_time5) || '',
+      end_time5: ((_0 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _0 === void 0 ? void 0 : _0.end_time5) || '',
+      work_style5: ((_1 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _1 === void 0 ? void 0 : _1.work_style5) || '',
+      work_day6: ((_2 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _2 === void 0 ? void 0 : _2.work_day6) || '',
+      start_time6: ((_3 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _3 === void 0 ? void 0 : _3.start_time6) || '',
+      end_time6: ((_4 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _4 === void 0 ? void 0 : _4.end_time6) || '',
+      work_style6: ((_5 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _5 === void 0 ? void 0 : _5.work_style6) || '',
+      work_day7: ((_6 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _6 === void 0 ? void 0 : _6.work_day7) || '',
+      start_time7: ((_7 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _7 === void 0 ? void 0 : _7.start_time7) || '',
+      end_time7: ((_8 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _8 === void 0 ? void 0 : _8.end_time7) || '',
+      work_style7: ((_9 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _9 === void 0 ? void 0 : _9.work_style7) || ''
     }),
     _ref2 = _slicedToArray(_ref, 1),
     formData = _ref2[0];
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u9031\u5831\u78BA\u8A8D",
     leftBtn: 'back_btn',
-    subHeaderProp: 'text-center btn-primary text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center btn-primary text-white h5 py-2 mb-0',
     leftBtnProp: "fa-solid fa-backward-step"
   }), react_1["default"].createElement("div", {
     className: "wrapper"
@@ -8593,7 +8784,9 @@ var ReportsComfirm = function ReportsComfirm() {
     name: "schedule",
     value: formData.schedule,
     readOnly: true
-  }))), react_1["default"].createElement("tr", null, react_1["default"].createElement("td", null, "\u4ECA\u9031\u306E\u4F5C\u696D\u6642\u9593")))), react_1["default"].createElement("div", {
+  }))))), react_1["default"].createElement("div", {
+    className: 'h6'
+  }, "\u4ECA\u9031\u306E\u4F5C\u696D\u6642\u9593 (\u203B\u30C6\u30EC\u30EF\u30FC\u30AF\u306E\u5834\u5408\u306F\u2714\uFE0F)"), react_1["default"].createElement("div", {
     className: "row pb-2"
   }, react_1["default"].createElement("div", {
     className: "col-5"
@@ -8618,6 +8811,14 @@ var ReportsComfirm = function ReportsComfirm() {
     type: "time",
     name: "end_time1",
     value: formData.end_time1,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style1",
+    type: "checkbox",
+    name: "work_style1",
+    checked: formData.work_style1,
     readOnly: true
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
@@ -8645,6 +8846,14 @@ var ReportsComfirm = function ReportsComfirm() {
     name: "end_time2",
     value: formData.end_time2,
     readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style2",
+    type: "checkbox",
+    name: "work_style2",
+    checked: formData.work_style2,
+    readOnly: true
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
   }, react_1["default"].createElement("div", {
@@ -8670,6 +8879,14 @@ var ReportsComfirm = function ReportsComfirm() {
     type: "time",
     name: "end_time3",
     value: formData.end_time3,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style3",
+    type: "checkbox",
+    name: "work_style3",
+    checked: formData.work_style3,
     readOnly: true
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
@@ -8697,6 +8914,14 @@ var ReportsComfirm = function ReportsComfirm() {
     name: "end_time4",
     value: formData.end_time4,
     readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style4",
+    type: "checkbox",
+    name: "work_style4",
+    checked: formData.work_style4,
+    readOnly: true
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
   }, react_1["default"].createElement("div", {
@@ -8722,6 +8947,82 @@ var ReportsComfirm = function ReportsComfirm() {
     type: "time",
     name: "end_time5",
     value: formData.end_time5,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style5",
+    type: "checkbox",
+    name: "work_style5",
+    checked: formData.work_style5,
+    readOnly: true
+  }))), react_1["default"].createElement("div", {
+    className: "row pb-2"
+  }, react_1["default"].createElement("div", {
+    className: "col-5"
+  }, react_1["default"].createElement("input", {
+    id: "work_day6",
+    type: "date",
+    name: "work_day6",
+    value: formData.work_day6,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "start_time6",
+    type: "time",
+    name: "start_time6",
+    value: formData.start_time6,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "end_time6",
+    type: "time",
+    name: "end_time6",
+    value: formData.end_time6,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style6",
+    type: "checkbox",
+    name: "work_style6",
+    checked: formData.work_style6,
+    readOnly: true
+  }))), react_1["default"].createElement("div", {
+    className: "row pb-2"
+  }, react_1["default"].createElement("div", {
+    className: "col-5"
+  }, react_1["default"].createElement("input", {
+    id: "work_day7",
+    type: "date",
+    name: "work_day7",
+    value: formData.work_day7,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "start_time7",
+    type: "time",
+    name: "start_time7",
+    value: formData.start_time7,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "end_time7",
+    type: "time",
+    name: "end_time7",
+    value: formData.end_time7,
+    readOnly: true
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style7",
+    type: "checkbox",
+    name: "work_style7",
+    checked: formData.work_style7,
     readOnly: true
   }))), react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
     className: "btn mt-2 buttonW btn-primary",
@@ -8826,7 +9127,7 @@ var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/a
 var getCsrfToken_1 = __webpack_require__(/*! ../function/getCsrfToken */ "./resources/ts/function/getCsrfToken.tsx");
 // 週報提出用のコンポーネント
 var ReportsPost = function ReportsPost() {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39;
   // 画面遷移された際の初期値を設定する
   var location = (0, react_router_dom_1.useLocation)();
   var data = location.state.data;
@@ -8841,7 +9142,6 @@ var ReportsPost = function ReportsPost() {
       name_id: (data === null || data === void 0 ? void 0 : data.user.id) || '',
       key_number: (data === null || data === void 0 ? void 0 : data.key_number) || '',
       today: (data === null || data === void 0 ? void 0 : data.today) || '',
-      reporting_date: (data === null || data === void 0 ? void 0 : data.today.replace(/[年月日]/g, '-')) || '',
       newPost: (data === null || data === void 0 ? void 0 : data.newPost) || false,
       first_day: ((_a = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _a === void 0 ? void 0 : _a.first_day) || '',
       last_day: ((_b = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _b === void 0 ? void 0 : _b.last_day) || '',
@@ -8851,28 +9151,49 @@ var ReportsPost = function ReportsPost() {
       work_day1: ((_j = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _j === void 0 ? void 0 : _j.work_day1) || ((_k = data === null || data === void 0 ? void 0 : data.lastReports) === null || _k === void 0 ? void 0 : _k.work_day1) || '',
       start_time1: ((_l = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _l === void 0 ? void 0 : _l.start_time1) || ((_m = data === null || data === void 0 ? void 0 : data.lastReports) === null || _m === void 0 ? void 0 : _m.start_time1) || '',
       end_time1: ((_o = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _o === void 0 ? void 0 : _o.end_time1) || ((_p = data === null || data === void 0 ? void 0 : data.lastReports) === null || _p === void 0 ? void 0 : _p.end_time1) || '',
-      work_day2: ((_q = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _q === void 0 ? void 0 : _q.work_day2) || ((_r = data === null || data === void 0 ? void 0 : data.lastReports) === null || _r === void 0 ? void 0 : _r.work_day2) || '',
-      start_time2: ((_s = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _s === void 0 ? void 0 : _s.start_time2) || ((_t = data === null || data === void 0 ? void 0 : data.lastReports) === null || _t === void 0 ? void 0 : _t.start_time2) || '',
-      end_time2: ((_u = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _u === void 0 ? void 0 : _u.end_time2) || ((_v = data === null || data === void 0 ? void 0 : data.lastReports) === null || _v === void 0 ? void 0 : _v.end_time2) || '',
-      work_day3: ((_w = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _w === void 0 ? void 0 : _w.work_day3) || ((_x = data === null || data === void 0 ? void 0 : data.lastReports) === null || _x === void 0 ? void 0 : _x.work_day3) || '',
-      start_time3: ((_y = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _y === void 0 ? void 0 : _y.start_time3) || ((_z = data === null || data === void 0 ? void 0 : data.lastReports) === null || _z === void 0 ? void 0 : _z.start_time3) || '',
-      end_time3: ((_0 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _0 === void 0 ? void 0 : _0.end_time3) || ((_1 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _1 === void 0 ? void 0 : _1.end_time3) || '',
-      work_day4: ((_2 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _2 === void 0 ? void 0 : _2.work_day4) || ((_3 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _3 === void 0 ? void 0 : _3.work_day4) || '',
-      start_time4: ((_4 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _4 === void 0 ? void 0 : _4.start_time4) || ((_5 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _5 === void 0 ? void 0 : _5.start_time4) || '',
-      end_time4: ((_6 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _6 === void 0 ? void 0 : _6.end_time4) || ((_7 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _7 === void 0 ? void 0 : _7.end_time4) || '',
-      work_day5: ((_8 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _8 === void 0 ? void 0 : _8.work_day5) || ((_9 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _9 === void 0 ? void 0 : _9.work_day5) || '',
-      start_time5: ((_10 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _10 === void 0 ? void 0 : _10.start_time5) || ((_11 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _11 === void 0 ? void 0 : _11.start_time5) || '',
-      end_time5: ((_12 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _12 === void 0 ? void 0 : _12.end_time5) || ((_13 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _13 === void 0 ? void 0 : _13.end_time5) || ''
+      work_style1: ((_q = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _q === void 0 ? void 0 : _q.work_style1) || ((_r = data === null || data === void 0 ? void 0 : data.lastReports) === null || _r === void 0 ? void 0 : _r.work_style1) || '',
+      work_day2: ((_s = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _s === void 0 ? void 0 : _s.work_day2) || ((_t = data === null || data === void 0 ? void 0 : data.lastReports) === null || _t === void 0 ? void 0 : _t.work_day2) || '',
+      start_time2: ((_u = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _u === void 0 ? void 0 : _u.start_time2) || ((_v = data === null || data === void 0 ? void 0 : data.lastReports) === null || _v === void 0 ? void 0 : _v.start_time2) || '',
+      end_time2: ((_w = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _w === void 0 ? void 0 : _w.end_time2) || ((_x = data === null || data === void 0 ? void 0 : data.lastReports) === null || _x === void 0 ? void 0 : _x.end_time2) || '',
+      work_style2: ((_y = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _y === void 0 ? void 0 : _y.work_style2) || ((_z = data === null || data === void 0 ? void 0 : data.lastReports) === null || _z === void 0 ? void 0 : _z.work_style2) || '',
+      work_day3: ((_0 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _0 === void 0 ? void 0 : _0.work_day3) || ((_1 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _1 === void 0 ? void 0 : _1.work_day3) || '',
+      start_time3: ((_2 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _2 === void 0 ? void 0 : _2.start_time3) || ((_3 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _3 === void 0 ? void 0 : _3.start_time3) || '',
+      end_time3: ((_4 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _4 === void 0 ? void 0 : _4.end_time3) || ((_5 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _5 === void 0 ? void 0 : _5.end_time3) || '',
+      work_style3: ((_6 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _6 === void 0 ? void 0 : _6.work_style3) || ((_7 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _7 === void 0 ? void 0 : _7.work_style3) || '',
+      work_day4: ((_8 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _8 === void 0 ? void 0 : _8.work_day4) || ((_9 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _9 === void 0 ? void 0 : _9.work_day4) || '',
+      start_time4: ((_10 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _10 === void 0 ? void 0 : _10.start_time4) || ((_11 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _11 === void 0 ? void 0 : _11.start_time4) || '',
+      end_time4: ((_12 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _12 === void 0 ? void 0 : _12.end_time4) || ((_13 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _13 === void 0 ? void 0 : _13.end_time4) || '',
+      work_style4: ((_14 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _14 === void 0 ? void 0 : _14.work_style4) || ((_15 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _15 === void 0 ? void 0 : _15.work_style4) || '',
+      work_day5: ((_16 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _16 === void 0 ? void 0 : _16.work_day5) || ((_17 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _17 === void 0 ? void 0 : _17.work_day5) || '',
+      start_time5: ((_18 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _18 === void 0 ? void 0 : _18.start_time5) || ((_19 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _19 === void 0 ? void 0 : _19.start_time5) || '',
+      end_time5: ((_20 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _20 === void 0 ? void 0 : _20.end_time5) || ((_21 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _21 === void 0 ? void 0 : _21.end_time5) || '',
+      work_style5: ((_22 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _22 === void 0 ? void 0 : _22.work_style5) || ((_23 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _23 === void 0 ? void 0 : _23.work_style5) || '',
+      work_day6: ((_24 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _24 === void 0 ? void 0 : _24.work_day6) || ((_25 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _25 === void 0 ? void 0 : _25.work_day6) || '',
+      start_time6: ((_26 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _26 === void 0 ? void 0 : _26.start_time6) || ((_27 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _27 === void 0 ? void 0 : _27.start_time6) || '',
+      end_time6: ((_28 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _28 === void 0 ? void 0 : _28.end_time6) || ((_29 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _29 === void 0 ? void 0 : _29.end_time6) || '',
+      work_style6: ((_30 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _30 === void 0 ? void 0 : _30.work_style6) || ((_31 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _31 === void 0 ? void 0 : _31.work_style6) || '',
+      work_day7: ((_32 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _32 === void 0 ? void 0 : _32.work_day7) || ((_33 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _33 === void 0 ? void 0 : _33.work_day7) || '',
+      start_time7: ((_34 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _34 === void 0 ? void 0 : _34.start_time7) || ((_35 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _35 === void 0 ? void 0 : _35.start_time7) || '',
+      end_time7: ((_36 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _36 === void 0 ? void 0 : _36.end_time7) || ((_37 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _37 === void 0 ? void 0 : _37.end_time7) || '',
+      work_style7: ((_38 = data === null || data === void 0 ? void 0 : data.reportsPost) === null || _38 === void 0 ? void 0 : _38.work_style7) || ((_39 = data === null || data === void 0 ? void 0 : data.lastReports) === null || _39 === void 0 ? void 0 : _39.work_style7) || ''
     }),
     _ref4 = _slicedToArray(_ref3, 2),
     formData = _ref4[0],
     setFormData = _ref4[1];
+  var change = function change(e) {
+    var _e$target = e.target,
+      name = _e$target.name,
+      checked = _e$target.checked;
+    setFormData(function (prevData) {
+      return Object.assign(Object.assign({}, prevData), _defineProperty({}, name, checked));
+    });
+  };
   // フォームが変更された際にステートの値を更新する
   var handleChange = function handleChange(e) {
     // 渡ってきたインプットの情報を設定する
-    var _e$target = e.target,
-      name = _e$target.name,
-      value = _e$target.value;
+    var _e$target2 = e.target,
+      name = _e$target2.name,
+      value = _e$target2.value;
     // 入力項目が開始日なら作業時間を自動入力をする
     if (name === 'first_day') {
       handleWorkDayChange(e);
@@ -8899,14 +9220,16 @@ var ReportsPost = function ReportsPost() {
             setError('・必須項目を入力してください。');
             return _context.abrupt("return");
           case 4:
-            _context.prev = 4;
+            console.log(formData.work_style1);
+            //
+            _context.prev = 5;
             // csfrトークンを取得してヘッダーに追加する
             csrfToken = (0, getCsrfToken_1.getCsrfToken)();
             axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
             // APIエンドポイントにPOSTリクエストを送信
-            _context.next = 9;
+            _context.next = 10;
             return axios_1["default"].post(formData.newPost ? rootConst_1.rootConst.REPORTSPOSTENTRYAPI : rootConst_1.rootConst.REPORTSPOSTEDITAPI, formData);
-          case 9:
+          case 10:
             response = _context.sent;
             // レスポンスによって処理の流れを制御する
             if (response.status === 200) {
@@ -8915,17 +9238,17 @@ var ReportsPost = function ReportsPost() {
             } else {
               console.error('Error Happen');
             }
-            _context.next = 16;
+            _context.next = 17;
             break;
-          case 13:
-            _context.prev = 13;
-            _context.t0 = _context["catch"](4);
+          case 14:
+            _context.prev = 14;
+            _context.t0 = _context["catch"](5);
             console.error('Error submitting form:', _context.t0);
-          case 16:
+          case 17:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[4, 13]]);
+      }, _callee, null, [[5, 14]]);
     }));
   };
   // 日付が変更されたときに作業時間に連続する5日を設定する関数
@@ -8948,7 +9271,7 @@ var ReportsPost = function ReportsPost() {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: !formData.newPost ? '週報提出(更新)' : '週報提出',
     leftBtn: 'back_btn',
-    subHeaderProp: "text-center ".concat(!formData.newPost ? 'bg-warning' : 'bg-success', " text-white h4 py-2 mb-0"),
+    subHeaderProp: "text-center ".concat(!formData.newPost ? 'bg-warning' : 'bg-success', " text-white h5 py-2 mb-0"),
     leftBtnProp: "fa-solid fa-backward-step"
   }), react_1["default"].createElement("div", {
     className: "wrapper"
@@ -9015,7 +9338,9 @@ var ReportsPost = function ReportsPost() {
     onChange: function onChange(e) {
       return handleChange(e);
     }
-  }))), react_1["default"].createElement("tr", null, react_1["default"].createElement("td", null, "\u4ECA\u9031\u306E\u4F5C\u696D\u6642\u9593")))), react_1["default"].createElement("div", {
+  }))))), react_1["default"].createElement("div", {
+    className: 'h6'
+  }, "\u4ECA\u9031\u306E\u4F5C\u696D\u6642\u9593 (\u203B\u30C6\u30EC\u30EF\u30FC\u30AF\u306E\u5834\u5408\u306F\u2714\uFE0F)"), react_1["default"].createElement("div", {
     className: "row pb-2"
   }, react_1["default"].createElement("div", {
     className: "col-5"
@@ -9046,6 +9371,16 @@ var ReportsPost = function ReportsPost() {
     value: formData.end_time1,
     onChange: function onChange(e) {
       return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style1",
+    type: "checkbox",
+    name: "work_style1",
+    checked: formData.work_style1,
+    onChange: function onChange(e) {
+      return change(e);
     }
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
@@ -9079,6 +9414,16 @@ var ReportsPost = function ReportsPost() {
     onChange: function onChange(e) {
       return handleChange(e);
     }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style2",
+    type: "checkbox",
+    name: "work_style2",
+    checked: formData.work_style2,
+    onChange: function onChange(e) {
+      return change(e);
+    }
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
   }, react_1["default"].createElement("div", {
@@ -9110,6 +9455,16 @@ var ReportsPost = function ReportsPost() {
     value: formData.end_time3,
     onChange: function onChange(e) {
       return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style3",
+    type: "checkbox",
+    name: "work_style3",
+    checked: formData.work_style3,
+    onChange: function onChange(e) {
+      return change(e);
     }
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
@@ -9143,6 +9498,16 @@ var ReportsPost = function ReportsPost() {
     onChange: function onChange(e) {
       return handleChange(e);
     }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style4",
+    type: "checkbox",
+    name: "work_style4",
+    checked: formData.work_style4,
+    onChange: function onChange(e) {
+      return change(e);
+    }
   }))), react_1["default"].createElement("div", {
     className: "row pb-2"
   }, react_1["default"].createElement("div", {
@@ -9174,6 +9539,100 @@ var ReportsPost = function ReportsPost() {
     value: formData.end_time5,
     onChange: function onChange(e) {
       return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style5",
+    type: "checkbox",
+    name: "work_style5",
+    checked: formData.work_style5,
+    onChange: function onChange(e) {
+      return change(e);
+    }
+  }))), react_1["default"].createElement("div", {
+    className: "row pb-2"
+  }, react_1["default"].createElement("div", {
+    className: "col-5"
+  }, react_1["default"].createElement("input", {
+    id: "work_day6",
+    type: "date",
+    name: "work_day6",
+    value: formData.work_day6,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "start_time6",
+    type: "time",
+    name: "start_time6",
+    value: formData.start_time6,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "end_time6",
+    type: "time",
+    name: "end_time6",
+    value: formData.end_time6,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style6",
+    type: "checkbox",
+    name: "work_style6",
+    checked: formData.work_style6,
+    onChange: function onChange(e) {
+      return change(e);
+    }
+  }))), react_1["default"].createElement("div", {
+    className: "row pb-2"
+  }, react_1["default"].createElement("div", {
+    className: "col-5"
+  }, react_1["default"].createElement("input", {
+    id: "work_day7",
+    type: "date",
+    name: "work_day7",
+    value: formData.work_day7,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "start_time7",
+    type: "time",
+    name: "start_time7",
+    value: formData.start_time7,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-3"
+  }, react_1["default"].createElement("input", {
+    id: "end_time7",
+    type: "time",
+    name: "end_time7",
+    value: formData.end_time7,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "col-1"
+  }, react_1["default"].createElement("input", {
+    id: "work_style7",
+    type: "checkbox",
+    name: "work_style7",
+    checked: formData.work_style7,
+    onChange: function onChange(e) {
+      return change(e);
     }
   }))), react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
     type: "submit",
@@ -9348,20 +9807,24 @@ var userEdit = function userEdit() {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             e.preventDefault();
+            if (!(url === rootConst_1.rootConst.USEREDITDELETEAPI ? window.confirm('このユーザーを削除しますか？') : window.confirm('権限の変更を行いますか？'))) {
+              _context.next = 16;
+              break;
+            }
             if (arr) {
               formData.AdminAuth = arr[0];
               formData.CheckAuth = arr[1];
               formData.eName = arr[2];
               formData.eId = arr[3];
             }
-            _context.prev = 2;
+            _context.prev = 3;
             // csfrトークンを取得してヘッダーに追加する
             csrfToken = (0, getCsrfToken_1.getCsrfToken)();
             axios_1["default"].defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
             // APIエンドポイントにPOSTリクエストを送信
-            _context.next = 7;
+            _context.next = 8;
             return axios_1["default"].post(url, formData);
-          case 7:
+          case 8:
             response = _context.sent;
             fetchedData = response.data;
             if (response.status === 200) {
@@ -9374,29 +9837,29 @@ var userEdit = function userEdit() {
             } else {
               console.error('Error Happen');
             }
-            _context.next = 15;
+            _context.next = 16;
             break;
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](2);
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context["catch"](3);
             console.error('Error submitting form:', _context.t0);
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[2, 12]]);
+      }, _callee, null, [[3, 13]]);
     }));
   };
   // 型アサーションを使って state の型を指定
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(header_1["default"], {
     label: "\u30E6\u30FC\u30B6\u30FC\u7DE8\u96C6",
     leftBtn: 'back_btn',
-    subHeaderProp: 'text-center bg-secondary text-white h4 py-2 mb-0',
+    subHeaderProp: 'text-center bg-secondary text-white h5 py-2 mb-0',
     leftBtnProp: "fa-solid fa-backward-step"
   }), react_1["default"].createElement("div", {
     className: "wrapper px-0 mx-0 "
   }, formData.msg && react_1["default"].createElement("p", {
-    className: 'text-danger pt-1'
+    className: 'text-success pt-1'
   }, formData.msg), react_1["default"].createElement("form", {
     className: 'mt-2 ml-4',
     onSubmit: function onSubmit(e) {
@@ -9470,6 +9933,51 @@ var userEdit = function userEdit() {
   })))));
 };
 exports["default"] = userEdit;
+
+/***/ }),
+
+/***/ "./node_modules/js-file-download/file-download.js":
+/*!********************************************************!*\
+  !*** ./node_modules/js-file-download/file-download.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+module.exports = function(data, filename, mime, bom) {
+    var blobData = (typeof bom !== 'undefined') ? [bom, data] : [data]
+    var blob = new Blob(blobData, {type: mime || 'application/octet-stream'});
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        // IE workaround for "HTML7007: One or more blob URLs were
+        // revoked by closing the blob for which they were created.
+        // These URLs will no longer resolve as the data backing
+        // the URL has been freed."
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+        var blobURL = (window.URL && window.URL.createObjectURL) ? window.URL.createObjectURL(blob) : window.webkitURL.createObjectURL(blob);
+        var tempLink = document.createElement('a');
+        tempLink.style.display = 'none';
+        tempLink.href = blobURL;
+        tempLink.setAttribute('download', filename);
+
+        // Safari thinks _blank anchor are pop ups. We only want to set _blank
+        // target if the browser does not support the HTML5 download attribute.
+        // This allows you to download files in desktop safari if pop up blocking
+        // is enabled.
+        if (typeof tempLink.download === 'undefined') {
+            tempLink.setAttribute('target', '_blank');
+        }
+
+        document.body.appendChild(tempLink);
+        tempLink.click();
+
+        // Fixes "webkit blob resource error 1"
+        setTimeout(function() {
+            document.body.removeChild(tempLink);
+            window.URL.revokeObjectURL(blobURL);
+        }, 200)
+    }
+}
+
 
 /***/ }),
 
